@@ -1,0 +1,169 @@
+﻿.form-control.input-validation-error {
+    border: 1px solid #ee1010;
+}
+
+span.field-validation-error {
+    color: #ee1010;
+}
+
+em {
+    color: red;
+}
+
+.tbl-no-record td {
+    padding: 20px !important;
+    text-align: center;
+    vertical-align: middle;
+    color: #ee1010;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.validation-summary-errors ul {
+    padding-left: 0px !important;
+}
+
+    .validation-summary-errors ul li {
+        list-style: none;
+    }
+
+.demo-nifty-settings {
+    display: none;
+}
+
+.select2-container {
+    width: 100% !important;
+}
+
+.select2-selection {
+    border: 1px solid rgba(0,0,0,0.2) !important;
+}
+
+.bootstrap-tagsinput, .form-control-file {
+    border: 1px solid rgba(0,0,0,0.2) !important;
+}
+
+.form-control:read-only {
+    background: #fff;
+}
+
+.error {
+    border: 1px solid red;
+    background-color: coral;
+}
+
+.highl {
+    color: red;
+}
+
+.highlight {
+    background-color: yellowgreen;
+    background: #25476A;
+}
+
+    .highlight td {
+        color: #fff;
+    }
+
+    .highlight .highl {
+        color: #ffd800;
+    }
+
+    .highlight .btn-spacer {
+        background: #FFDD00;
+        color: #000;
+    }
+
+a.link {
+    color: #0912c2 !important;
+}
+
+    a.link:hover {
+        color: #0a16fb !important;
+    }
+
+.action-group {
+    margin-top: 20px;
+}
+
+@media(max:400px) {
+    .action-group {
+        margin-top: 0px !important;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    /* Force table to not be like tables anymore */
+    #no-more-tables table,
+    #no-more-tables thead,
+    #no-more-tables tbody,
+    #no-more-tables th,
+    #no-more-tables td,
+    #no-more-tables tr {
+        display: block;
+    }
+    .action-btn
+    {
+        margin: 0px 0px !important;
+    }
+    /* Hide table headers (but not display: none;, for accessibility) */
+    #no-more-tables thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    /*#no-more-tables tr {
+        border: 1px solid #ccc;
+    }*/
+
+    #no-more-tables td {
+        /* Behave like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+        white-space: normal;
+        text-align: left;
+        font-size: 12px !important;
+        font-weight: normal !important;
+        color: #000 !important;
+    }
+
+        #no-more-tables td:before {
+            position: absolute;
+            top: 11px;
+            left: 6px;
+            width: 50%;
+            padding-right: 10px;
+            white-space: nowrap;
+            text-align: left;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        #no-more-tables .tryup td:before {
+            top: 13px;
+        }
+        #no-more-tables .manage-nomore td:before {
+            top: 5px;
+        }
+        
+        /*#no-more-tables .tryup td:before:first-child {
+            top: -40px;
+        }*/
+
+        /*
+    Label the data
+    */
+        #no-more-tables td:before {
+            content: attr(data-title);
+            white-space: normal;
+        }
+}
+
+@media (max-width: 768px) {
+    .row {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+}

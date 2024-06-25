@@ -1,0 +1,259 @@
+﻿@using Leadership.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+    Layout = null;
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Log in - Survey</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/images/icon.png" rel="icon">
+    @Styles.Render("~/Content/design")
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.min.js"></script>
+    <link href="~/Content/css/initcarousel-1.css" rel="stylesheet" />
+    <script src="~/Scripts/amazingcarousel.js"></script>
+    <script src="~/Scripts/initcarousel-1.js"></script>
+    <!-- Gallery -->
+    @*<link rel="stylesheet" href="css/smartphoto.min.css">*@
+    <link href="~/Content/css/smartphoto.min.css" rel="stylesheet" />
+    @*<script src="js/smartphoto.js?v=1"></script>*@
+    <script src="~/Scripts/smartphoto.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            new smartPhoto(".js-img-viwer");
+        });
+    </script>
+    <style>
+        body {
+            background: #FAF6F4;
+            /*background: #D8DEE7;*/
+        }
+
+        .full-title {
+            display: flex;
+            text-align: center;
+            padding: 20px 20px 0;
+        }
+
+            .full-title h1 {
+                flex: 1;
+                font-size: 30px;
+                margin: 15px 0 5px;
+                color: #000;
+                letter-spacing: 1px;
+                font-weight: bold;
+            }
+
+        .font-title {
+            color: #007135;
+        }
+
+        .main-header {
+            display: flex;
+            padding: 10px 20px;
+            background: #fff;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid #007135
+        }
+
+            .main-header div {
+                flex: 1;
+                text-align: center;
+            }
+
+        /*.left-logo {
+            text-align: left;
+        }
+
+        .center-logo {
+            text-align: center;
+        }
+
+        .right-logo {
+            text-align: right;
+        }*/
+
+        .main-header div img {
+            width: 80px
+        }
+            .main-header .right-logo img, .main-header .shiksha-logo img {
+                width: 150px
+            }
+
+        .fixed-left {
+            position: absolute;
+            top: 220px;
+            left: -50px;
+            width: 320px;
+        }
+
+        .fixed-right {
+            position: absolute;
+            top: 220px;
+            right: 20px;
+            width: 230px;
+        }
+
+        .alumni {
+            background: #fff;
+            padding: 40px 20px;
+            text-align: center
+        }
+
+            .alumni h2 {
+                color: #E4701E;
+                font-size: 30px;
+                margin-top: 0px;
+                margin-bottom: 20px;
+            }
+
+        .alumni-list {
+            flex: 1;
+            margin-top: 50px;
+        }
+
+        @@media all and (max-width: 1024px) {
+            .fixed-left {
+                top: 220px;
+                width: 300px;
+            }
+
+            .fixed-right {
+                top: 220px;
+                right: 40px;
+                width: 200px;
+            }
+
+            .alumni-list {
+                flex: 1;
+                margin-top: 0px;
+                border-top: 1px solid #ccc;
+                padding-top: 25px;
+                padding-bottom: 35px
+            }
+        }
+
+        @@media all and (max-width: 900px) {
+            .fixed-left {
+                top: 240px;
+                width: 260px;
+            }
+
+            .fixed-right {
+                top: 240px;
+                right: 20px;
+                width: 170px;
+            }
+        }
+
+        @@media all and (max-width: 768px) {
+            .fixed-right, .fixed-left {
+                display: none
+            }
+
+            .main-header div img {
+                width: 60px
+            }
+
+            .main-header .right-logo img, .main-header .shiksha-logo img {
+                width: 120px
+            }
+
+            .full-title h1 {
+                font-size: 28px;
+            }
+        }
+
+        @@media all and (max-width: 600px) {
+            .main-header div img {
+                width: 40px
+            }
+
+            .main-header .right-logo img, .main-header .shiksha-logo img {
+                width: 80px
+            }
+
+            .full-title h1 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-header">
+        <div class="left-logo">
+            <img src="~/Content/images/pci.png" alt="PCI" />
+        </div>
+        @*<div class="center-logo">
+            <img src="~/Content/images/goj.png" alt="Jharkhand education" />
+        </div>
+        <div class="shiksha-logo">
+            <img src="~/Content/images/shiksha-ka-adhikar.png" alt="Shiksha ka Adhikar">
+        </div>
+        <div class="right-logo">
+            <img src="~/Content/images/care-india.png" alt="Care India" />
+        </div>*@
+    </div>
+    <div class="card-login">
+        <div class="full-title">
+            <h1>
+                @*<strong>Leadership Pizza Self-Assessment</strong>*@
+                <strong>Competency</strong>
+                @*<span class="font-title">K</span>asturba <span class="font-title">G</span>andhi <span class="font-title">B</span>alika <span class="font-title">V</span>idyalaya*@
+            </h1>
+        </div>
+        <div class="div-login row">
+            <div class="login-card">
+                @*<img src="~/Content/images/User-Icon.jpg" class="card-login-icon wow zoomIn" data-wow-duration="700ms" data-wow-delay="500ms" />*@
+                <h2 class="wow zoomIn" data-wow-duration="700ms" data-wow-delay="700ms">Log In</h2>
+                <p class="wow zoomIn" data-wow-duration="700ms" data-wow-delay="900ms">Enter your credential to access your account</p>
+                <div class="">
+                    <section id="loginForm">
+                        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "orm-vertical", role = "form", id = "loginform" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group wow zoomIn" data-wow-duration="700ms" data-wow-delay="1100ms">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-card effect-8", placeholder = "Username" })
+                                <span class="card-icon"><i class="fa fa-user"></i></span>
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                            @*<div class="form-group wow zoomIn" data-wow-duration="700ms" data-wow-delay="1300ms">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-card effect-8", placeholder = "Password" })
+                                <span class="card-icon"><i class="fa fa-key"></i></span>
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>*@
+                            @*<div class="form-group wow zoomIn" data-wow-duration="700ms" data-wow-delay="1500ms">
+                                <div class="checkbox">
+                                    @Html.CheckBoxFor(m => m.RememberMe, new { @class = "input-checkbox" })
+                                    <span class="check-title">Remember Me</span>
+                                </div>
+                            </div>*@
+                            <div class="break"></div>
+                            <div class="form-group wow zoomIn" data-wow-duration="700ms" data-wow-delay="1700ms">
+                                <input type="submit" id="btnSubmit" value="Log in" class="btn btn-card" />
+                            </div>
+                            @*<p class="wow zoomIn" data-wow-duration="700ms" data-wow-delay="1800ms"><a href="ForgotPassword">Forgot Password?</a></p>*@
+                        }
+                    </section>
+                </div>
+            </div>
+          
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p class="wow fadeInUp" data-wow-duration="400ms" data-wow-delay="300ms">© 2024 PCI India. All Rights Reserved.</p>
+    </div>
+    <!-- Fixed Pic -->
+    @*<img src="~/Content/images/student-reading.png" alt="student reading" class="fixed-left" />
+    <img src="~/Content/images/three-cool-pic.png" alt="students" class="fixed-right" />*@
+</body>
+</html>
+@*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
+@Scripts.Render("~/bundles/jqueryval")

@@ -1,0 +1,439 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LeadershipModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuestionBook">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FormId_fk" Type="int" />
+          <Property Name="TypeLanguage" Type="nvarchar" MaxLength="50" />
+          <Property Name="QuestionCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="HindiQuestion" Type="nvarchar(max)" />
+          <Property Name="Question" Type="nvarchar(max)" />
+          <Property Name="QuestionType" Type="nvarchar" MaxLength="500" />
+          <Property Name="SectionType" Type="nvarchar" MaxLength="200" />
+          <Property Name="ControlType" Type="nvarchar" MaxLength="500" />
+          <Property Name="ControlInputType" Type="nvarchar" MaxLength="100" />
+          <Property Name="QuestTypeValidation" Type="nvarchar" MaxLength="100" />
+          <Property Name="ParentQuestionCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="DependedAnswer" Type="nvarchar" MaxLength="50" />
+          <Property Name="Frequency" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReportingBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="AnswerCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="Limit" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsRepeat" Type="bit" />
+          <Property Name="OrderBy" Type="int" />
+          <Property Name="DisplayIndicator" Type="nvarchar(max)" />
+          <Property Name="ExtraOne" Type="nvarchar(max)" />
+          <Property Name="IsQuestionDisplay" Type="bit" />
+        </EntityType>
+        <EntityType Name="QuestionOption">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeLanguage" Type="nvarchar" MaxLength="50" />
+          <Property Name="FormId_fk" Type="int" />
+          <Property Name="QuestionId_fk" Type="int" />
+          <Property Name="QuestionCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="OptionTypeValidation" Type="nvarchar" MaxLength="100" />
+          <Property Name="HindiOptionText" Type="nvarchar" MaxLength="500" />
+          <Property Name="LabelName1" Type="nvarchar" MaxLength="200" />
+          <Property Name="LabelName2" Type="nvarchar" MaxLength="200" />
+          <Property Name="OptionText" Type="nvarchar" MaxLength="500" />
+          <Property Name="OptionCode" Type="nvarchar" MaxLength="500" />
+          <Property Name="ControlInputType" Type="nvarchar" MaxLength="500" />
+          <Property Name="ControlInputType1" Type="nvarchar" MaxLength="500" />
+          <Property Name="InputType" Type="nvarchar" MaxLength="50" />
+          <Property Name="InputType1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Limit" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="UpdatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbl_Survey">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FormId" Type="int" />
+          <Property Name="SchoolId" Type="int" />
+          <Property Name="Date" Type="date" />
+          <Property Name="YearId" Type="int" />
+          <Property Name="FrequencyId" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="UpdatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbl_SurveyAnswer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SId_fk" Type="int" />
+          <Property Name="QuestionId_fk" Type="int" />
+          <Property Name="QuestionCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="QuestionOption_fk" Type="int" />
+          <Property Name="ResponseCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="InputValue" Type="nvarchar(max)" />
+          <Property Name="InputValue1" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="UpdatedOn" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_tbl_SurveyAnswer_tbl_Survey">
+          <End Role="tbl_Survey" Type="Self.tbl_Survey" Multiplicity="0..1" />
+          <End Role="tbl_SurveyAnswer" Type="Self.tbl_SurveyAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Survey">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_SurveyAnswer">
+              <PropertyRef Name="SId_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LeadershipModelStoreContainer">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuestionBook" EntityType="Self.QuestionBook" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuestionOption" EntityType="Self.QuestionOption" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Survey" EntityType="Self.tbl_Survey" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_SurveyAnswer" EntityType="Self.tbl_SurveyAnswer" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbl_SurveyAnswer_tbl_Survey" Association="Self.FK_tbl_SurveyAnswer_tbl_Survey">
+            <End Role="tbl_Survey" EntitySet="tbl_Survey" />
+            <End Role="tbl_SurveyAnswer" EntitySet="tbl_SurveyAnswer" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LeadershipModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="LeadershipEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetRoles" EntityType="LeadershipModel.AspNetRole" />
+          <EntitySet Name="AspNetUsers" EntityType="LeadershipModel.AspNetUser" />
+          <EntitySet Name="QuestionBooks" EntityType="LeadershipModel.QuestionBook" />
+          <EntitySet Name="QuestionOptions" EntityType="LeadershipModel.QuestionOption" />
+          <EntitySet Name="tbl_Survey" EntityType="LeadershipModel.tbl_Survey" />
+          <EntitySet Name="tbl_SurveyAnswer" EntityType="LeadershipModel.tbl_SurveyAnswer" />
+          <AssociationSet Name="FK_tbl_SurveyAnswer_tbl_Survey" Association="LeadershipModel.FK_tbl_SurveyAnswer_tbl_Survey">
+            <End Role="tbl_Survey" EntitySet="tbl_Survey" />
+            <End Role="tbl_SurveyAnswer" EntitySet="tbl_SurveyAnswer" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="QuestionBook">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FormId_fk" Type="Int32" />
+          <Property Name="TypeLanguage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QuestionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HindiQuestion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="QuestionType" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SectionType" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ControlType" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ControlInputType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="QuestTypeValidation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ParentQuestionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DependedAnswer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Frequency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReportingBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AnswerCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Limit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsRepeat" Type="Boolean" />
+          <Property Name="OrderBy" Type="Int32" />
+          <Property Name="DisplayIndicator" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ExtraOne" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsQuestionDisplay" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="QuestionOption">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeLanguage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FormId_fk" Type="Int32" />
+          <Property Name="QuestionId_fk" Type="Int32" />
+          <Property Name="QuestionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OptionTypeValidation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HindiOptionText" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LabelName1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LabelName2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="OptionText" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="OptionCode" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ControlInputType" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ControlInputType1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="InputType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InputType1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Limit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tbl_Survey">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FormId" Type="Int32" />
+          <Property Name="SchoolId" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="YearId" Type="Int32" />
+          <Property Name="FrequencyId" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbl_SurveyAnswer" Relationship="LeadershipModel.FK_tbl_SurveyAnswer_tbl_Survey" FromRole="tbl_Survey" ToRole="tbl_SurveyAnswer" />
+        </EntityType>
+        <EntityType Name="tbl_SurveyAnswer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SId_fk" Type="Int32" />
+          <Property Name="QuestionId_fk" Type="Int32" />
+          <Property Name="QuestionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QuestionOption_fk" Type="Int32" />
+          <Property Name="ResponseCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InputValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InputValue1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbl_Survey" Relationship="LeadershipModel.FK_tbl_SurveyAnswer_tbl_Survey" FromRole="tbl_SurveyAnswer" ToRole="tbl_Survey" />
+        </EntityType>
+        <Association Name="FK_tbl_SurveyAnswer_tbl_Survey">
+          <End Type="LeadershipModel.tbl_Survey" Role="tbl_Survey" Multiplicity="0..1" />
+          <End Type="LeadershipModel.tbl_SurveyAnswer" Role="tbl_SurveyAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Survey">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_SurveyAnswer">
+              <PropertyRef Name="SId_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LeadershipModelStoreContainer" CdmEntityContainer="LeadershipEntities">
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="LeadershipModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="LeadershipModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionBooks">
+            <EntityTypeMapping TypeName="LeadershipModel.QuestionBook">
+              <MappingFragment StoreEntitySet="QuestionBook">
+                <ScalarProperty Name="IsQuestionDisplay" ColumnName="IsQuestionDisplay" />
+                <ScalarProperty Name="ExtraOne" ColumnName="ExtraOne" />
+                <ScalarProperty Name="DisplayIndicator" ColumnName="DisplayIndicator" />
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+                <ScalarProperty Name="IsRepeat" ColumnName="IsRepeat" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Limit" ColumnName="Limit" />
+                <ScalarProperty Name="AnswerCode" ColumnName="AnswerCode" />
+                <ScalarProperty Name="ReportingBy" ColumnName="ReportingBy" />
+                <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+                <ScalarProperty Name="DependedAnswer" ColumnName="DependedAnswer" />
+                <ScalarProperty Name="ParentQuestionCode" ColumnName="ParentQuestionCode" />
+                <ScalarProperty Name="QuestTypeValidation" ColumnName="QuestTypeValidation" />
+                <ScalarProperty Name="ControlInputType" ColumnName="ControlInputType" />
+                <ScalarProperty Name="ControlType" ColumnName="ControlType" />
+                <ScalarProperty Name="SectionType" ColumnName="SectionType" />
+                <ScalarProperty Name="QuestionType" ColumnName="QuestionType" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="HindiQuestion" ColumnName="HindiQuestion" />
+                <ScalarProperty Name="QuestionCode" ColumnName="QuestionCode" />
+                <ScalarProperty Name="TypeLanguage" ColumnName="TypeLanguage" />
+                <ScalarProperty Name="FormId_fk" ColumnName="FormId_fk" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionOptions">
+            <EntityTypeMapping TypeName="LeadershipModel.QuestionOption">
+              <MappingFragment StoreEntitySet="QuestionOption">
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Limit" ColumnName="Limit" />
+                <ScalarProperty Name="InputType1" ColumnName="InputType1" />
+                <ScalarProperty Name="InputType" ColumnName="InputType" />
+                <ScalarProperty Name="ControlInputType1" ColumnName="ControlInputType1" />
+                <ScalarProperty Name="ControlInputType" ColumnName="ControlInputType" />
+                <ScalarProperty Name="OptionCode" ColumnName="OptionCode" />
+                <ScalarProperty Name="OptionText" ColumnName="OptionText" />
+                <ScalarProperty Name="LabelName2" ColumnName="LabelName2" />
+                <ScalarProperty Name="LabelName1" ColumnName="LabelName1" />
+                <ScalarProperty Name="HindiOptionText" ColumnName="HindiOptionText" />
+                <ScalarProperty Name="OptionTypeValidation" ColumnName="OptionTypeValidation" />
+                <ScalarProperty Name="QuestionCode" ColumnName="QuestionCode" />
+                <ScalarProperty Name="QuestionId_fk" ColumnName="QuestionId_fk" />
+                <ScalarProperty Name="FormId_fk" ColumnName="FormId_fk" />
+                <ScalarProperty Name="TypeLanguage" ColumnName="TypeLanguage" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Survey">
+            <EntityTypeMapping TypeName="LeadershipModel.tbl_Survey">
+              <MappingFragment StoreEntitySet="tbl_Survey">
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FrequencyId" ColumnName="FrequencyId" />
+                <ScalarProperty Name="YearId" ColumnName="YearId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="SchoolId" ColumnName="SchoolId" />
+                <ScalarProperty Name="FormId" ColumnName="FormId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_SurveyAnswer">
+            <EntityTypeMapping TypeName="LeadershipModel.tbl_SurveyAnswer">
+              <MappingFragment StoreEntitySet="tbl_SurveyAnswer">
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="InputValue1" ColumnName="InputValue1" />
+                <ScalarProperty Name="InputValue" ColumnName="InputValue" />
+                <ScalarProperty Name="ResponseCode" ColumnName="ResponseCode" />
+                <ScalarProperty Name="QuestionOption_fk" ColumnName="QuestionOption_fk" />
+                <ScalarProperty Name="QuestionCode" ColumnName="QuestionCode" />
+                <ScalarProperty Name="QuestionId_fk" ColumnName="QuestionId_fk" />
+                <ScalarProperty Name="SId_fk" ColumnName="SId_fk" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

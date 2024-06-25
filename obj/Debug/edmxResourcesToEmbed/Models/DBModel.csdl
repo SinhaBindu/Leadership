@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LeadershipModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="LeadershipEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AspNetRoles" EntityType="LeadershipModel.AspNetRole" />
+    <EntitySet Name="AspNetUsers" EntityType="LeadershipModel.AspNetUser" />
+    <EntitySet Name="QuestionBooks" EntityType="LeadershipModel.QuestionBook" />
+    <EntitySet Name="QuestionOptions" EntityType="LeadershipModel.QuestionOption" />
+    <EntitySet Name="tbl_Survey" EntityType="LeadershipModel.tbl_Survey" />
+    <EntitySet Name="tbl_SurveyAnswer" EntityType="LeadershipModel.tbl_SurveyAnswer" />
+    <AssociationSet Name="FK_tbl_SurveyAnswer_tbl_Survey" Association="LeadershipModel.FK_tbl_SurveyAnswer_tbl_Survey">
+      <End Role="tbl_Survey" EntitySet="tbl_Survey" />
+      <End Role="tbl_SurveyAnswer" EntitySet="tbl_SurveyAnswer" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="QuestionBook">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FormId_fk" Type="Int32" />
+    <Property Name="TypeLanguage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="QuestionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="HindiQuestion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="QuestionType" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="SectionType" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ControlType" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ControlInputType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="QuestTypeValidation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ParentQuestionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DependedAnswer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Frequency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ReportingBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AnswerCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Limit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="IsRepeat" Type="Boolean" />
+    <Property Name="OrderBy" Type="Int32" />
+    <Property Name="DisplayIndicator" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ExtraOne" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsQuestionDisplay" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="QuestionOption">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeLanguage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FormId_fk" Type="Int32" />
+    <Property Name="QuestionId_fk" Type="Int32" />
+    <Property Name="QuestionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="OptionTypeValidation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="HindiOptionText" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="LabelName1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="LabelName2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="OptionText" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="OptionCode" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ControlInputType" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ControlInputType1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="InputType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="InputType1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Limit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tbl_Survey">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FormId" Type="Int32" />
+    <Property Name="SchoolId" Type="Int32" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="YearId" Type="Int32" />
+    <Property Name="FrequencyId" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tbl_SurveyAnswer" Relationship="LeadershipModel.FK_tbl_SurveyAnswer_tbl_Survey" FromRole="tbl_Survey" ToRole="tbl_SurveyAnswer" />
+  </EntityType>
+  <EntityType Name="tbl_SurveyAnswer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SId_fk" Type="Int32" />
+    <Property Name="QuestionId_fk" Type="Int32" />
+    <Property Name="QuestionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="QuestionOption_fk" Type="Int32" />
+    <Property Name="ResponseCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="InputValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="InputValue1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tbl_Survey" Relationship="LeadershipModel.FK_tbl_SurveyAnswer_tbl_Survey" FromRole="tbl_SurveyAnswer" ToRole="tbl_Survey" />
+  </EntityType>
+  <Association Name="FK_tbl_SurveyAnswer_tbl_Survey">
+    <End Type="LeadershipModel.tbl_Survey" Role="tbl_Survey" Multiplicity="0..1" />
+    <End Type="LeadershipModel.tbl_SurveyAnswer" Role="tbl_SurveyAnswer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Survey">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tbl_SurveyAnswer">
+        <PropertyRef Name="SId_fk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

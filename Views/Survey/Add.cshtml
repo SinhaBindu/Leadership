@@ -1,0 +1,826 @@
+﻿@model  Leadership.Models.QesRes
+@*@model  List<Leadership.Models.HRModel>*@
+@using Leadership.Models;
+@{
+    ViewBag.Title = "Leadership Pizza Self-Assessment";
+    // ViewBag.TitleIcon = "fa fa-user";
+    //ViewBag.SemiTitle = "Leadership Pizza Self-Assessment";
+    // ViewBag.SemiTitleLink = "~/";
+    string IsSadmin = string.Empty;
+    var idreadyonly = Model.Id != 0 ? "style=pointer-events:none;" : "";
+    // var url = Request.Url.AbsolutePath;
+}
+
+
+@helper BindQueston(List<Leadership.Models.FormModel> list)
+{
+    if (list != null)
+    {
+        var ii = 0;
+        Model.Qlist = list.OrderBy(x => Convert.ToInt32(x.QuestionCode)).ToList();
+        var pvsection = "";
+        foreach (var item in Model.Qlist.ToList())
+        {
+            //pvsection = pvsection == "" ? item.SectionType : pvsection;
+            var Isdis = string.IsNullOrWhiteSpace(item.ParentQuestionCode) == false ? "style=display:none;" : "style=display:block;";
+            <div class="@item.ParentQuestionCode" @Isdis>
+                <div class="form-group q-design">
+                    @if ((item.SectionType.Trim()).ToLower() != (pvsection.Trim()).ToLower() || pvsection == "")
+                    {
+                        <div class="col-md-12 q-title"><strong>@item.SectionType</strong></div>
+                    }
+
+                <span class="control-label col-md-4">
+                    @(item.QuestionCode+". " +item.Question) <em>*</em>
+                    @if (item.QuestionId_pk == 2)
+                    {
+                        <div class="help-tip">
+                            <p>
+                                <span>
+                                    Communicator – Leaders must inspire others and the most powerful tool for this is Communication. Communication is a mix of several thing, like knowing when to speak and when to listen, to be present, to be focused
+                                    With Communication, you bring in transparency and for this you need to do these :
+                                </span>
+                                <br />
+                                <span class="sp"> <strong style="font-weight:700; font-size:16px;">1</strong>. Tell me more – seek information </span>
+                                <span class="sp">
+                                    <strong style="font-weight: 700; font-size: 16px;">2</strong>. Explain the concept – understand clearly what is being said
+                                </span>
+                                <span class="sp">
+                                    <strong style="font-weight: 700; font-size: 16px;">3</strong>. Define that term to me – this way, you can lead the speaker to share details
+                                </span>
+                            </p>
+                        </div>
+                    }
+                    @if (item.QuestionId_pk == 4)
+                    {
+                        <div class="help-tip">
+                            <p>
+                                <span>   Optimistic Outlook – </span>
+                                <br />
+                                <span class="sp"> <strong style="font-weight:700; font-size:50px;">.</strong>  Focus on finding solutions rather than analyzing mistakes </span>
+                                <span class="sp">
+                                    <strong style="font-weight:700; font-size:50px;">.</strong> Be innovative and creative
+                                </span>
+                                <span class="sp">
+                                    <strong style="font-weight:700; font-size:50px;">.</strong>   Think out of the box
+                                </span>
+                                <span class="sp">
+                                    <strong style="font-weight:700; font-size:50px;">.</strong>  Don’t be afraid to fail
+                                </span>
+                            </p>
+                        </div>
+                    }
+                    @if (item.QuestionId_pk == 5)
+                    {
+                        <div class="help-tip">
+                            <p>
+                            <span>    Risk Taking – When you step out of the square, you build confidence in your team to also try new things. Risk taking is contagious. But how do you take calculated risks which will contain loss ?</span>
+                                <br />
+                                <span class="sp"> <strong style="font-weight:700; font-size:50px;">.</strong>  Define clear goals </span>
+                                <span class="sp">
+                                    <strong style="font-weight:700; font-size:50px;">.</strong> Measure your resources
+                                </span>
+                                <span class="sp">
+                                    <strong style="font-weight:700; font-size:50px;">.</strong>   Trust yourself
+                                </span>
+                                <span class="sp">
+                                    <strong style="font-weight:700; font-size:50px;">.</strong>  Develop EQ
+                                </span>
+                                <span class="sp">
+                                    <strong style="font-weight:700; font-size:50px;">.</strong>  Learn from past mistakes
+                                </span>
+                                <span class="sp">
+                                    <strong style="font-weight:700; font-size:50px;">.</strong>  Evaluate outcomes – do a SWOT analysis ( Strength, Weakness, Opportunities, Threats )
+                                </span>
+                            </p>
+                        </div>
+                    }
+
+                </span>
+                    <div class="col-md-6 q-check-input">
+                        @Html.HiddenFor(m => m.Qlist[ii].QuestionCode)
+                        @Html.HiddenFor(m => m.Qlist[ii].QuestionId_pk)
+                        @Html.HiddenFor(m => m.Qlist[ii].ControlType)
+                        @Html.HiddenFor(m => m.Qlist[ii].ControlInputType)
+                        @Html.HiddenFor(m => m.Qlist[ii].SectionType)
+
+
+                        @*@Html.TextBoxFor(m => m.Qlist[ii].QuestionCode)*@
+                        @if (item.ControlType.ToLower() == "checkbox")
+                        {
+                            for (int i = 0; i < item.OptionList.Count; i++)
+                            {
+                                var sel = Model.Qlist[ii].QuestionCode + Model.Qlist[ii].OptionList[i].Value;
+                                var cl = "Qlist_" + ii + "__OptionList_" + i + "__InputText";
+                                var cl1 = "Qlist_" + ii + "__OptionList_" + i + "__InputText1";
+                                var inputval = string.IsNullOrWhiteSpace(Model.Qlist[ii].OptionList[i].InputText) ? "display:none" : "display:block";
+                                var inputval1 = string.IsNullOrWhiteSpace(Model.Qlist[ii].OptionList[i].InputText1) ? "display:none" : "display:block";
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].QuestionCode)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].QuestionId_fk)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].OptionId_Pk)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Id)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].ControlInputType)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Limit)
+
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Value)
+                                @Html.DisplayFor(m => m.Qlist[ii].OptionList[i].Text)
+                                @Html.CheckBoxFor(m => m.Qlist[ii].OptionList[i].SelectedItem,
+                    new
+                    {
+                        Style = "vertical-align:3px",
+                        @data_QIndex = ii,
+                        @data_OptIndex = i,
+                        @data_QuestCode = Model.Qlist[ii].QuestionCode,
+                        //@required = @Model.Qlist[ii].OptionTypeValidation,
+                        @class = Model.Qlist[ii].ParentQuestionCode + " " + "QuestCode" + Model.Qlist[ii].QuestionCode,
+                        @onchange = "OnChgTargetcontrol('Qlist_" + ii + "__OptionList_" + i + "__InputText','Qlist_" + ii + "__OptionList_" + i + "__InputText1' ,'" + Model.Qlist[ii].OptionList[i].Value + "','" + Model.Qlist[ii].OptionList[i].SelectedItem + "',this)",
+                    })
+                                @*if (item.OptionList[i].ControlInputType != null)
+                                    {
+                                        if (item.OptionList[i].ControlInputType.ToLower() == "textbox")
+                                        {
+                                            var cln = !string.IsNullOrWhiteSpace(Model.Qlist[ii].OptionList[i].LabelName1) ? Model.Qlist[ii].OptionList[i].LabelName1.Replace(" ", "_") : "";
+                                            <div class="@cl" style="@inputval">
+                                                @Html.DisplayFor(m => m.Qlist[ii].OptionList[i].LabelName1, new { htmlAttributes = new { @class = "", @Style = "" } })
+                                                @Html.EditorFor(m => m.Qlist[ii].OptionList[i].InputText, new
+                                           {
+                                               htmlAttributes = new
+                                               {
+                                                   @data_qcode = Model.Qlist[ii].QuestionCode,
+                                                   @class = "form-control txt " + cln + i + " " + Model.Qlist[ii].OptionList[i].InputText + " " + Model.Qlist[ii].OptionList[i].QuestionCode + i + " txt" + Model.Qlist[ii].ParentQuestionCode + " " + Model.Qlist[ii].DependedAnswer,
+                                                   Style = "" + inputval + "",
+                                                   @maxlength = Model.Qlist[ii].OptionList[i].Limit,
+                                                   //@required = @Model.Qlist[ii].OptionTypeValidation,
+                                                   @type = Model.Qlist[ii].OptionList[i].OptionTypeValidation,
+                                                   @onchange = "OnChangInputLimit('" + item.Question + "','" + Model.Qlist[ii].OptionList[i].Limit + "',this)"
+                                               }
+                                           })
+                                            </div>
+                                        }
+                                    }*@
+                                if (item.OptionList[i].ControlInputType1 != null)
+                                {
+                                    if (item.OptionList[i].ControlInputType1.ToLower() == "textbox")
+                                    {
+                                        <div class="@cl1" style="@inputval1">
+                                            @Html.DisplayFor(m => m.Qlist[ii].OptionList[i].LabelName2, new { @class = "", @Style = "" })
+                                            @Html.EditorFor(m => m.Qlist[ii].OptionList[i].InputText1, new
+                                             {
+                                                htmlAttributes = new
+                                                {
+                                                    @data_qcode = Model.Qlist[ii].QuestionCode,
+                                                    @class = "form-control txt " + Model.Qlist[ii].OptionList[i].InputText1 + " " + Model.Qlist[ii].OptionList[i].QuestionCode + i + " txt" + Model.Qlist[ii].ParentQuestionCode,
+                                                    Style = "" + inputval + "",
+                                                    @maxlength = Model.Qlist[ii].OptionList[i].Limit,
+                                                    //@required = @Model.Qlist[ii].OptionTypeValidation,
+                                                    @type = Model.Qlist[ii].OptionList[i].OptionTypeValidation,
+                                                    @onchange = "OnChangInputLimit('" + item.Question + "','" + Model.Qlist[ii].OptionList[i].Limit + "',this)"
+                                                }
+                                           })
+                                        </div>
+                                    }
+                                }
+                            }
+                        }
+                        @if (item.ControlType.ToLower() == "radiobutton")
+                        {
+                            for (int i = 0; i < item.OptionList.Count; i++)
+                            {
+                                var sel = Model.Qlist[ii].QuestionCode + Model.Qlist[ii].OptionList[i].Value;
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].QuestionCode)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].QuestionId_fk)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].OptionId_Pk)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Id)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].ControlInputType)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Limit)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Value)
+
+                                @Html.RadioButtonFor(m => m.Qlist[ii].Answer, Model.Qlist[ii].OptionList[i].Value,
+                                 new
+                                 {
+                                     @data_isselected = Model.Qlist[ii].OptionList[i].SelectedItem ? "true" : "false",
+                                     @data_QIndex = ii,
+                                     @data_OptIndex = i,
+                                     @data_qcode = Model.Qlist[ii].QuestionCode,
+                                     @data_depans = Model.Qlist[ii].DependedAnswer,
+                                     @data_parentqcode = Model.Qlist[ii].ParentQuestionCode,
+                                     @class = Model.Qlist[ii].ParentQuestionCode + " " + "QuestCode" + Model.Qlist[ii].QuestionCode,
+                                     @id = Model.Qlist[ii].OptionList[i].OptionCode,
+                                     //@required = @Model.Qlist[ii].OptionTypeValidation,
+                                     onchange = "OnChangeRadio('" + @item.QuestionCode + "', '" + @item.OptionList[i].Value + "','" + Model.Qlist[ii].DependedAnswer + "', this)",
+                                 })
+                                <label for="@item.OptionList[i].Text.ToLower()" class="q-lable">@item.OptionList[i].Text</label><br>
+                            }
+                        }
+                        @if (item.ControlType.ToLower() == "textbox")
+                        {
+                            for (int i = 0; i < item.OptionList.Count; i++)
+                            {
+                                var sel = Model.Qlist[ii].QuestionCode + Model.Qlist[ii].OptionList[i].Value;
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].QuestionCode)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].QuestionId_fk)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].OptionId_Pk)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Id)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].ControlInputType)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Limit)
+
+                                @Html.EditorFor(m => m.Qlist[ii].OptionList[i].InputText, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @data_QIndex = ii,
+                                   @data_OptIndex = i,
+                                   @data_qcode = Model.Qlist[ii].QuestionCode,
+                                   @data_depans = Model.Qlist[ii].DependedAnswer,
+                                   //@required = @Model.Qlist[ii].OptionTypeValidation,
+                                   @type = Model.Qlist[ii].OptionList[i].OptionTypeValidation,
+                                   @class = "form-control txt " + Model.Qlist[ii].ParentQuestionCode + " " + Model.Qlist[ii].OptionList[i].QuestionCode,
+                                   Style = "display:block"
+                               }
+                           })
+                            }
+                        }
+                        @if (item.ControlType.ToLower() == "radio")
+                        {
+                            <div id="ratingDiv" class="smallText" data-value="@(item.QuestionId_pk)">
+                                @for (int i = 0; i < item.OptionList.Count; i++)
+                                {
+                                    var opcode = item.OptionList[i].Value;
+                                    @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].QuestionCode)
+                                    @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].QuestionId_fk)
+                                    @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].OptionId_Pk)
+                                    @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Id)
+                                    @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].ControlInputType)
+                                    @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Limit)
+
+                                    @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].OptionCode)
+                                    if (item.OptionList[i].OptionCode == Enums.EnumRatingGB.Poor.ToString())
+                                    {
+                                        <span>Poor</span>
+                                    }
+                                    @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].AnswerValue, new { @class = "qidoptid" + item.QuestionId_pk + opcode + "" })
+                                    <input type="hidden" name="hdfd" id="hdfd" value="" />
+                                    @*<input type="hidden" name="Qlist[@item.QuestionId_pk].OptionList[@opcode].AnswerValue" id="Qlist[@item.QuestionId_pk].OptionList[@opcode].AnswerValue" value="0" />*@
+                                    <label class="star empty q-lable">
+                                        <input type="radio" name="Qlist[@ii].Answer" id="Qlist_@(item.QuestionId_pk)OptionList_@opcode" value="@opcode" required class="rstar" data-value="@item.QuestionId_pk"><i class="fa fa-star"></i>
+                                    </label>
+
+
+                                    @*question@(item.QuestionId_pk)  Qlist[@ii].Answer<img src="~/Content/images/whitestar.jpg" alt="" class="ratingStar" data-value="@item.OptionList[i].OptionCode" style="width:50px;height:30px;" />*@
+                                    if (item.OptionList[i].OptionCode == Enums.EnumRatingGB.Excellent.ToString())
+                                    {
+                                        <span>Excellent</span>
+                                    }
+                                }
+                                <div id="errors@(ii)" class="text-danger errors@(item.QuestionId_pk)"></div>
+                                @Html.ValidationMessageFor(m => m.Qlist[ii].Answer, "", new { })
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            pvsection = (item.SectionType.Trim());
+            ii++;
+        }
+    }
+}
+
+<link href="~/Content/plugins/multiple-email/email.multiple.css" rel="stylesheet" />
+<link href="~/Content/Addcss.css" rel="stylesheet" />
+<style>
+    [name^='Qlist'] {
+        display: none;
+    }
+
+    .star {
+        font-size: 30px;
+        cursor: pointer;
+    }
+
+    .empty i {
+        color: #ccc;
+    }
+
+    .green i {
+        /*color: lightgreen;*/
+        color: #ffb300;
+    }
+
+    /* The icon */
+    .help-tip {
+        /*position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto;*/
+        text-align: center;
+        border: 2px solid #d93333;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        font-size: 24px;
+        line-height: 25px;
+        cursor: default;
+    }
+
+        .help-tip:before {
+            content: 'i';
+            font-family: sans-serif;
+            font-weight: normal;
+            /*color:#444;*/
+            color: #d93333;
+            font-weight: 900;
+        }
+
+        .help-tip:hover p {
+            display: block;
+            transform-origin: 100% 0%;
+            -webkit-animation: fadeIn 0.3s ease;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* The tooltip */
+        .help-tip p {
+            display: none;
+            font-family: sans-serif;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            text-align: center;
+            background-color: #FFFFFF;
+            padding: 12px 16px;
+            width: 700px;
+            height: auto;
+            position: absolute;
+            left: 10%;
+            /*transform: translate(-50%, 5%);*/
+            border-radius: 3px;
+            /* 	border: 1px solid #E0E0E0; */
+            box-shadow: 0 0px 20px 0 rgba(0,0,0,0.1);
+            color: #37393D;
+            font-size: 12px;
+            line-height: 18px;
+            z-index: 99;
+        }
+
+            .help-tip p a {
+                color: #067df7;
+                text-decoration: none;
+            }
+
+                .help-tip p a:hover {
+                    text-decoration: underline;
+                }
+
+            /* The pointer of the tooltip */
+            .help-tip p:before {
+                position: absolute;
+                content: '';
+                width: 0;
+                height: 0;
+                border: 10px solid transparent;
+                border-bottom-color: #FFFFFF;
+                top: -9px;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            /* Prevents the tooltip from being hidden */
+            .help-tip p:after {
+                width: 100%;
+                /*height: 40px;*/
+                content: '';
+                position: absolute;
+                top: -50px;
+                left: 0;
+            }
+
+    /* CSS animation */
+    @@-webkit-keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 100%;
+        }
+    }
+
+    @@keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 100%;
+        }
+    }
+    .sp {
+        display: block;
+        /* padding: 5px; */
+        border: 1px solid #383863;
+    }
+</style>
+
+<div id="page-content">
+    <div class="genral-form">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel">
+                    @using (Html.BeginForm("Add", "Survey", FormMethod.Post, new { @class = "panel-body form-horizontal form-padding loader", enctype = "multipart/form-data", @id = "FormSubmit" }))
+                    {
+                        <div class="col-md-12">
+                            @Html.Partial("_Alerts")
+                            <strong class="msgerror" style="font-size:16px !important;"></strong>
+                        </div>
+                        <div class="panel-bodys">
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(m => m.Id)
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @*<p class="bord-btm pad-ver text-main text-bold"><i class="fa fa-users spacerright2"></i>Leadership Pizza Self-Assessment</p>*@
+
+                            @{
+                                if (Model != null)
+                                {
+                                    @BindQueston(Model.Qlist)
+                                }
+                            }
+                            <div class="form-group">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-3 pull-right">
+                                    <span class="">
+                                        <button type="submit" class="previous btn btn-primary btn-lg" id="btnsubmit">Submit</button>
+                                        <a href="~/Survey/Add" class="btn btn-dark btn-lg">Reset</a>
+                                    </span>
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts
+{
+
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Content/plugins/multiple-email/jquery.email.multiple.js"></script>
+    <script src="~/Scripts/CustomValidator.js"></script>
+    <script src="https://unpkg.com/bootstrap-multiselect@0.9.13/dist/js/bootstrap-multiselect.js"></script>
+    <link href="https://unpkg.com/bootstrap-multiselect@0.9.13/dist/css/bootstrap-multiselect.css" rel="stylesheet" />
+
+    <script>
+
+        var PartTimeSumtxt = 0;
+        $(document).ready(function () {
+
+            var inputsForm = document.querySelector("#FormSubmit");
+            inputsForm.onchange = function (e) {
+                if (e.target.type = "radio") {
+                    var stars = document.querySelectorAll(`[name='${e.target.name}']`);
+
+                    for (var i = 0; i < stars.length; i++) {
+                        var optval = stars[i].value;
+                        let questid = stars[i].attributes[6].value;
+                        $('.errors' + questid).html('');
+                        var cl = "qidoptid" + questid + optval;
+                        if (i < e.target.value) {
+                            stars[i].parentElement.classList.replace("empty", "green");
+                            document.getElementById("hdfd").value = e.target.value;
+                            $('.' + cl).val(optval);
+
+                        } else {
+                            stars[i].parentElement.classList.replace("green", "empty");
+                            $('.' + cl).val("0");
+                        }
+                    }
+                }
+            }
+
+            // just for showing the values (not required only for testing)
+            inputsForm.onsubmit = function () {
+                // console.log(`How is the customer service? => ${this.question1.value}\nHow is the turn-around-time? => ${this.question2.value}`);
+                return false;
+            }
+
+            $('#FormSubmit').validate({
+                errorClass: 'help-block animation-slideDown',
+                errorElement: 'div',
+                errorPlacement: function (error, e) {
+                    e.parents('.form-group > div').append(error);
+                },
+                highlight: function (e) {
+
+                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block').remove();
+                },
+                success: function (e) {
+                    e.closest('.form-group').removeClass('has-success has-error');
+                    e.closest('.help-block').remove();
+                },
+                rules: {
+                    CB_DeparturePlace: {
+                        required: true
+                    },
+                    CB_DestinationPlace: {
+                        required: true
+                    },
+
+                    CB_NumberofPassenger: {
+                        required: true,
+                        number: true
+                    },
+
+                    CB_Customer: {
+                        required: true
+                    }
+                }
+            });
+
+            $('#FormSubmit').submit(function (e) {
+               // debugger;
+                e.preventDefault();
+                $("#panel-load").show();
+                setTimeout(function () {
+                    $('span[id^=error_]').hide();
+                    var valid = $('#FormSubmit').valid();
+                    valid = checkIt();
+
+                    debugger;
+                    if ('@ViewBag.Qlist' != 'null' && '@ViewBag.Qlist' != '') {
+                        var Qcount1 = 0; var Qoptcount1 = 0;
+                        var mlist = '@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.Qlist))';
+                        mlist = JSON.parse(mlist);
+                        for (var i = 0; i < mlist.length; i++) {
+                            Qoptcount1 = 0;
+                            var objm = mlist[i].QuestionId_pk;
+                            var objaw = 'Qlist[' + i + '].Answer';
+                            var radioObj = document.getElementsByName(objaw);
+                            for (var j = 0; j < radioObj.length; j++) {
+                              //  var qid = radioObj[i].name;
+                                if (radioObj[j].checked) {
+                                    Qcount1++;
+                                    Qoptcount1++;
+                                    $('#errors' + i).html('');
+                                }
+                                if (Qoptcount1 <= 0) {
+                                    $('#errors' + i).html('This field is required.');
+                                    //$('#errors' + objm).css('color', 'red');
+                                }
+                            }
+                        }
+                        debugger;
+                        if (Qcount1 == mlist.length) {
+                            valid = true;
+                        }
+                        else {
+                            valid = false;
+                        }
+                    }
+
+                    //var radioObj = document.getElementsByClassName('rstar');
+                    //var radioLength = radioObj.length;
+                    //if (radioLength == undefined) {
+                    //    //if (radioObj.checked) {
+                    //    //    return radioObj.value;
+                    //    //} else {
+                    //    //    return "";
+                    //    //}
+                    //}
+                    //for (var i = 0; i < radioLength; i++) {
+                    //    var qid = radioObj[i].name;
+                    //    if (radioObj[i].checked) {
+                    //        var qidval = radioObj[i].attributes[6].value;
+                    //      //  return radioObj[i].value;
+                    //    }
+                    //}
+                  //  return "";
+
+                    //var rstar = document.getElementsByClassName("rstar");
+                    //var check1 = 0;
+                    //for (i = 0; i < rstar.length; i++) {
+                    //    if (rstar[i].checked) {
+                    //        check1++;
+
+                    //    }
+                    //}
+
+                    if (valid) {
+                        $('.msgerror').hide();
+                        debugger;
+                        //Serialize the form datas.
+                        var valdata = $("#FormSubmit").serialize();
+                        //to get alert popup
+                        //alert(valdata);
+                        //valdata.append(Draft: true);
+                        //var PostData = JSON.stringify({ model: valdata, IS_Draft:1 });
+                        $.ajax({
+                            url: "/Survey/Add",
+                            type: "POST",
+                            dataType: 'json',
+                            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                            data: valdata,
+                            success: function (resp) {
+                                if (resp.IsSuccess) {
+                                    toastr.success('Success', resp.msg);
+                                    var urlpath = "/Survey/Index";
+                                    location.href = urlpath;
+                                    var html = $(resp.htmlData);
+                                    var hiddenList = $('input[type="hidden"]', html);
+                                    $.each(hiddenList, function (i, item) {
+                                        console.log(item);
+                                        if (item.id) {
+                                            var hf = $('#' + item.id);
+                                            if (hf) {
+                                                $(hf).val($(item).val());
+                                                $(hf).val($(item).val());
+                                            }
+                                        }
+                                    });
+                                }
+                                else {
+                                    toastr.error('Danger', resp.msg);
+                                }
+                                $("#panel-load").hide();
+                            }
+                        });
+                    }
+                    else {
+                        $("#panel-load").hide();
+                        var input = $('.input-validation-error:first');
+                        if (input) {
+                            input.focus();
+                        }
+                        toastr.error('Error', "Please fill all required fields!!");
+                        return false;
+                    }
+                }, 100);
+            });//form end submited closed
+
+        });
+
+        function checkIt() {
+            let unit = document.getElementsByClassName("rstar");
+            let selected = false;
+            for (let i = 0; i < unit.length; i++) {
+                if (unit[i].checked) {
+                    selected = true;
+                    // break;
+                }
+            }
+            if (!selected) {
+               // toastr.error('Error', "Please fill all required fields!!");
+                // gErrorMsg = gErrorMsg + "Select a sex for your cat\n";
+                // alert(gErrorMsg);
+                selected = false;
+            }
+            return selected;
+        }
+
+
+        const groupBy = (array, key) => {
+            // Return the end result
+            return array.reduce((result, currentValue) => {
+                // If an array already present for key, push it to the array. Else create an array and push the object
+                (result[currentValue[key]] = result[currentValue[key]] || []).push(
+                    currentValue
+                );
+                // Return the current iteration `result` value, this will be taken as next iteration `result` value and accumulate
+                return result;
+            }, {}); // empty object is the initial value for result object
+        };
+        function CheckIfAnyOptionSelected(sectionId) {
+            var isAnyOptionOpted = false;
+            $('input:checkbox.' + sectionId).each(function () {
+                var sThisVal = (this.checked ? $(this).val() : "");
+                if (sThisVal) {
+                    isAnyOptionOpted = true;
+                    return isAnyOptionOpted;
+                }
+            });
+            $('input:radio.' + sectionId).each(function () {
+                var sThisVal = (this.checked ? $(this).val() : "");
+                if (sThisVal) {
+                    isAnyOptionOpted = true;
+                    return isAnyOptionOpted;
+                }
+            });
+            //$("." + sectionId).find("input:checked").each(function () {
+            //    isAnyOptionOpted = true;
+            //    return isAnyOptionOpted;
+            //});
+            return isAnyOptionOpted;
+        }
+
+        function Load() {
+            var form = $("#FormSubmit");
+            var chcklist = $('input[type="checkbox"]', form);
+            $.each(chcklist, function (i, item) {
+                if ($(item).is(':checked')) {
+                    var qindex = $(item).data('qindex');
+                    var optindex = $(item).data('optindex');
+                    var inp = $(`#Qlist_${qindex}__OptionList_${optindex}__InputText`);
+                    if (inp) {
+                        $(inp).css('display', 'block').attr('required', 'required');
+                    }
+                }
+            });
+
+            var radiolist = $('input[type="radio"]', form);
+            $.each(radiolist, function (i, item) {
+                var isselected = $(item).prop('checked');
+                var qcode = $(item).data('qcode');
+                var depans = $(item).data('depans');
+                var val = $(item).val();
+                if (isselected && val == depans) {
+                    $('.' + qcode).css('display', 'block');
+                }
+            });
+
+            //var txtlist = $('input[type="text"]', form);
+            //$.each(txtlist, function (i, item) {
+            //    txtChange(item, "");
+            //});
+            //CheckBoxTextOnchag();
+        }
+
+        //var ChildControlTypeId, Sel, Chck;
+        function OnChgTargetcontrol(ControlTypeId, ControlTypeId1, Sel, Chck, Ele) {
+            var id = Ele.id;
+            IsCheck = $("#" + id).is(':checked');
+            //var ContTypeId = $('#' + ControlTypeId);
+            if (IsCheck) {
+                $('.' + ControlTypeId).css('display', 'block');
+                $('.' + ControlTypeId1).css('display', 'block');
+                $('#' + ControlTypeId).css('display', 'block');
+                $('#' + ControlTypeId1).css('display', 'block');
+                $('#' + ControlTypeId).attr('required', 'required');
+                $('#' + ControlTypeId1).attr('required', 'required');
+
+            }
+            else {
+                $('.' + ControlTypeId).css('display', 'none');
+                $('.' + ControlTypeId1).css('display', 'none');
+                $('#' + ControlTypeId).css('display', 'none');
+                $('#' + ControlTypeId1).css('display', 'none');
+                $('#' + ControlTypeId).val('');
+                $('#' + ControlTypeId1).val('');
+                $('#' + ControlTypeId).removeAttr('required');
+                $('#' + ControlTypeId1).removeAttr('required');
+            }
+            CheckBoxTextOnchag();
+        }
+
+        function OnChangeRadio(QuestionCode, SelVal, DepandAns, Ele) {
+            debugger;
+            // var clname = $('.' + QuestionCode).attr('class');
+            var clname = $('.' + QuestionCode).attr('class') == undefined ? null : $('.' + QuestionCode).attr('class');
+            //if (clname) {
+            //    clname = clname.split(' ');
+            //}
+            //if (clname != null) {
+            //    //depeded Question
+            //    if (SelVal == DepandAns && QuestionCode == clname[0]) {
+            //        $('.' + QuestionCode).css('display', 'block');
+            //    }
+            //    else {
+            //        $('.' + QuestionCode).prop("checked", false);
+            //        $('.' + QuestionCode).css('display', 'none');
+            //        $('.txt' + QuestionCode).css('display', 'none');
+            //        $('.txt' + QuestionCode).val('');
+            //    }
+
+            //}
+            //else {
+            //    $('.txt' + QuestionCode).css('display', 'none');
+            //    $('.txt' + QuestionCode).val('');
+            //    $('.' + QuestionCode).prop('checked', false);
+            //    $('.' + QuestionCode).val('');
+            //    $('.' + QuestionCode).css('display', 'none');
+            //}
+            //CheckBoxTextOnchag();
+        }
+
+        function OnChangInputLimit(Ques, SelLimit, Ele) {
+            var cid = parseToNumber(Ele.value);
+            if (cid != 0 && parseToNumber(SelLimit) != 0) {
+                if (cid > parseToNumber(SelLimit)) {
+                    alert(Ques + 'Max Limit: ' + SelLimit);
+                    var inputid = Ele.id;
+                    $('#' + inputid).val('')
+                    return false;
+                }
+            }
+        }
+
+
+
+
+    </script>
+
+
+}

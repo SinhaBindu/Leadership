@@ -1,0 +1,203 @@
+﻿<header id="navbar">
+    <div id="navbar-container" class="boxed">
+        <div class="navbar-header">
+            <a href="~/Competency/Summary" class="navbar-brand">
+                @*<img src="~/Content/images/white-care-icon.png" class="brand-icon" />*@
+                <img src="~/Content/images/pci.png" class="brand-icon" alt="" />
+                <div class="brand-title">
+                    <span class="brand-text">Competency </span>
+                </div>
+            </a>
+        </div>
+        @*<a href="#"><img src="~/Content/images/jepc-logo.png" alt="Logo" class="logo-icon"></a>*@
+        <div class="navbar-content">
+            <ul class="nav navbar-top-links">
+                <li class="tgl-menu-btn">
+                    <a class="mainnav-toggle" href="#">
+                        <i class="demo-pli-list-view"></i>
+                    </a>
+                </li>
+                <div class="main-header">
+                    @*<div class="center-logo">
+                        <img src="~/Content/images/jepc.png" alt="Government of Jharkhand" />
+                    </div>*@
+                    @*<div class="center-logo">
+                        <img src="~/Content/images/goj.png" alt="Jharkhand education" />
+                    </div>
+                    <div class="right-logo">
+                        <img src="~/Content/images/care-india.png" alt="Care India" />
+                    </div>*@
+                </div>
+            </ul>
+            <ul class="nav navbar-top-links">
+                <li class="dropdown">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                        <i class="demo-pli-bell"></i>
+                        <span class="badge badge-header badge-danger"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
+                        <div class="nano scrollable">
+                            <div class="nano-content">
+                                @*<ul class="head-list">
+                                    <li>
+                                        <a href="#" class="media add-tooltip" data-title="Used space : 95%" data-container="body" data-placement="bottom">
+                                            <div class="media-left">
+                                                <i class="demo-pli-data-settings icon-2x text-main"></i>
+                                            </div>
+                                            <div class="media-body">
+                                                <p class="text-nowrap text-main text-semibold">HDD is full</p>
+                                                <div class="progress progress-sm mar-no">
+                                                    <div style="width: 95%;" class="progress-bar progress-bar-danger">
+                                                        <span class="sr-only">95% Complete</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="media" href="#">
+                                            <div class="media-left">
+                                                <i class="demo-pli-file-edit icon-2x"></i>
+                                            </div>
+                                            <div class="media-body">
+                                                <p class="mar-no text-nowrap text-main text-semibold">Write a news article</p>
+                                                <small>Last Update 8 hours ago</small>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="media" href="#">
+                                            <span class="label label-info pull-right">New</span>
+                                            <div class="media-left">
+                                                <i class="demo-pli-speech-bubble-7 icon-2x"></i>
+                                            </div>
+                                            <div class="media-body">
+                                                <p class="mar-no text-nowrap text-main text-semibold">Comment Sorting</p>
+                                                <small>Last Update 8 hours ago</small>
+                                            </div>
+                                    </li>
+                                    <li>
+                                        <a class="media" href="#">
+                                            <div class="media-left">
+                                                <i class="demo-pli-add-user-star icon-2x"></i>
+                                            </div>
+                                            <div class="media-body">
+                                                <p class="mar-no text-nowrap text-main text-semibold">New User Registered</p>
+                                                <small>4 minutes ago</small>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>*@
+                            </div>
+                        </div>
+                        @*<div class="pad-all bord-top">
+                            <a href="#" class="btn-link text-main box-block">
+                                <i class="pci-chevron chevron-right pull-right"></i>Show All Notifications
+                            </a>
+                        </div>*@
+                    </div>
+                </li>
+                <li id="dropdown-user" class="dropdown">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right">
+                        <span class="ic-user pull-right">
+                            <i class="demo-pli-male"></i>
+                        </span>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right panel-default">
+                        <ul class="head-list">
+                            @*<li>
+                                <a href="~/Employee/Profiles"><i class="demo-pli-male icon-lg icon-fw"></i> Profile</a>
+                            </li>*@
+                            @if (Request.IsAuthenticated)
+                            {
+                                @*<li>
+                                    <a href="~/Manage/ChangePassword"><i class="demo-pli-gear icon-lg icon-fw"></i> Change Password</a>
+                                </li>*@
+                                if (User.IsInRole("Admin"))
+                                {
+                                    @*<li>
+                                        <a href="~/Account/UserResetPassword"><i class="demo-pli-gear icon-lg icon-fw"></i> Reset Password</a>
+                                    </li>*@
+                                }
+                                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="demo-pli-unlock icon-lg icon-fw"></i> Logout</a></li>
+
+                                }
+                            }
+
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+<style>
+    .main-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        margin: 4px 0 0 25px;
+        padding: 0 20px;
+        min-width: 840px;
+    }
+
+        .main-header div {
+            flex: 1;
+        }
+
+    .left-logo {
+        text-align: left;
+    }
+
+    .center-logo {
+        text-align: center;
+    }
+
+    .right-logo {
+        text-align: right;
+    }
+
+    .main-header div img {
+        width: 55px !important
+    }
+
+    .main-header .right-logo img, .main-header .shiksha-logo img {
+        width: 110px !important
+    }
+    /*.brand-icon {
+        display: none !important
+    }*/
+    @@media screen and (max-width: 1250px) {
+        .main-header {
+            min-width: 740px;
+        }
+    }
+    @@media screen and (max-width: 1160px) {
+        .main-header {
+            min-width: 600px;
+        }
+    }
+    @@media screen and (max-width: 1050px) {
+        .main-header {
+            min-width: 500px;
+        }
+    }
+    @@media screen and (max-width: 768px) {
+        .main-header {
+            display: none;
+        }
+
+        .brand-icon {
+            display: block
+        }
+
+        .logo-icon {
+            margin-left: 60px !important
+        }
+    }
+</style>

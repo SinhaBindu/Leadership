@@ -1,0 +1,260 @@
+﻿@model  Leadership.Models.QesRes
+@using Leadership.Models
+@*@model IEnumerable<KGBV_JH.Models.QesRes>*@
+@{
+    ViewBag.Title = "Leadership Pizza Self-Assessment";
+    ViewBag.TitleIcon = "fa fa-user";
+    ViewBag.SemiTitle = "Leadership Pizza Self-Assessment (Add)";
+    ViewBag.SemiTitleLink = "/Survey/Add";
+
+}
+<style>
+    .panel-body {
+         padding: 0px 20px 5px; 
+    }
+</style>
+<div id="page-content">
+    <div class="genral-form">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel">
+                    <div class="panel-spacer">
+                        <p class="bord-btm pad-ver text-main text-bold">
+                            <i class="fa fa-list spacerright2"></i>@ViewBag.Title
+                        </p>
+                    </div>
+                    @using (Html.BeginForm("GetIndex", "Add", FormMethod.Post, new { @id = "tblList-frm", @class = "panel-body form-horizontal form-padding loader" }))
+                    {
+                        @*<div class="manage-bg">
+                            <div class="col-lg-2">
+                            </div>
+
+                            <div class="mark-devide2"></div>
+                            <div class="breaker"></div>
+                        </div>*@
+                    }
+                    <div class="col-md-12">@Html.Partial("_Alerts")</div>
+                    <div class="panel-body">
+                        <div class="row" id="div-main" >
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-12" id="sub-data-view">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/Custom/Master.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Data retrieved from https://gs.statcounter.com/vendor-market-share/mobile/
+            //Highcharts.chart('div-Chart', {
+            //    chart: {
+            //        styledMode: true
+            //    },
+            //    title: {
+            //        text: 'Mobile vendor market share, 2021',
+            //        align: 'left'
+            //    },
+            //    xAxis: {
+            //        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            //    },
+            //    series: [{
+            //        type: 'pie',
+            //        allowPointSelect: true,
+            //        keys: ['name', 'y', 'selected', 'sliced'],
+            //        data: [
+            //            ['Samsung', 27.79, true, true],
+            //            ['Apple', 27.34, false],
+            //            ['Xiaomi', 10.87, false],
+            //            ['Huawei', 8.48, false],
+            //            ['Oppo', 5.38, false],
+            //            ['Vivo', 4.17, false],
+            //            ['Realme', 2.57, false],
+            //            ['Unknown', 2.45, false],
+            //            ['Motorola', 2.22, false],
+            //            ['LG', 1.53, false],
+            //            ['Other', 7.2, false]
+            //        ],
+            //        showInLegend: true
+            //    }]
+            //});
+
+
+            LoadReport();
+
+
+        });
+
+        const groupBy = (array, key) => {
+            // Return the end result
+            return array.reduce((result, currentValue) => {
+                // If an array already present for key, push it to the array. Else create an array and push the object
+                (result[currentValue[key]] = result[currentValue[key]] || []).push(
+                    currentValue
+                );
+                // Return the current iteration `result` value, this will be taken as next iteration `result` value and accumulate
+                return result;
+            }, {}); // empty object is the initial value for result object
+        };
+
+        function LoadReport() {
+            $('#div-Chart').html("");
+            $('#global-loader').css('background', 'transparent').css('display', 'block');
+            $('#div-Chart').removeClass("text-danger");
+            var id = '#tblList-frm'
+            var url = $(id).attr("action");
+            var User = 'all';
+            // var FrequencyId = $("#FrequencyId").val();
+            $.ajax({
+                // url: url,
+                url: document.baseURI + "/Survey/GetIndex",
+                type: "POST",
+                data: { 'User': User },
+                // contentType: "application/json",
+                success: function (resp) {
+                    if (resp.IsSuccess) {
+                        //$('#div-Chart').html(resp.Data); $('#div-Chart').addClass("text-black");
+                        $('#global-loader').css('background', 'transparent').css('display', 'none');
+                        var Datal = [], QList = []; var index = 0;
+                        debugger;
+
+                        var Datalist = JSON.parse(resp.Data);
+                        if (Datalist != null && Datalist != undefined) {
+                            if (Datalist.length > 0) {
+
+                                var gpy = groupBy(Datalist, "Reportedby");
+                                $.each(gpy, function (item, row) {
+                                    var chart;
+                                    Datal = []; QList = [];
+                                    var div_Chart = 'div_Chart' + index;
+                                    var div_multiple = '<div class="col-sm-6" id="div_Chart' + index + '" style="width:490px; height:400px; border:1px solid #808080;"></div>';
+                                    $('#div-main').append(div_multiple);
+                                   var Datafilter = Datalist.filter(x => x.Reportedby == item);
+                                    for (var i = 0; i < Datafilter.length; i++) {
+                                        QList.push(Datafilter[i].Question);
+                                        Datal.push({ name: Datafilter[i].Question, y: Datafilter[i].Ans });
+                                    }
+
+                                    //Highcharts.setOptions({
+                                    //    colors: Highcharts.map(Highcharts.getOptions().colors, function (color) {
+                                    //        return {
+                                    //            radialGradient: {
+                                    //                cx: 0.5,
+                                    //                cy: 0.3,
+                                    //                r: 0.7
+                                    //            },
+                                    //            stops: [
+                                    //                [0, color],
+                                    //                [1, Highcharts.color(color).brighten(-0.3).get('rgb')] // darken
+                                    //            ]
+                                    //        };
+                                    //    })
+                                    //});
+
+
+
+                                    // Build the chart
+                                    /*  Highcharts.chart('div-Chart' + row, {*/
+                                    div_Chart = new Highcharts.Chart({
+                                        chart: {
+                                            renderTo: div_Chart,
+                                            plotBackgroundColor: null,
+                                            plotBorderWidth: null,
+                                            plotShadow: false,
+                                            type: 'pie'
+                                        },
+                                        title: {
+                                            // text: 'Leadership Pizza Self-Assessment',
+                                            text: item,
+                                            align: 'center'
+                                        },
+                                        tooltip: {
+                                            //  pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                                            pointFormat: '{series.name}: <b>{point.y}</b>'
+                                        },
+                                        credits: {
+                                            enabled: false
+                                        },
+                                        legend: {
+                                            layout: 'horizontal',
+                                            align: 'center',
+                                            verticalAlign: 'bottom',
+                                            floating: false,
+                                            borderWidth: 1,
+                                            backgroundColor: '#FFFFFF',
+                                            shadow: true,
+                                            labelFormatter: function () {
+                                                return '<div class="' + this.name + '-arrow"></div><span style="font-family: \'Advent Pro\', sans-serif; font-size:12px">' + this.name + '</span><br/><span style="font-size:12px; color:#ababaa">   Rating: ' + this.options.y + '</span>';
+                                            }
+                                        },
+                                        accessibility: {
+                                            //point: {
+                                            //    valueSuffix: '%'
+                                            //}
+                                        },
+                                        plotOptions: {
+                                            pie: {
+                                                allowPointSelect: true,
+                                                cursor: 'pointer',
+                                                dataLabels: {
+                                                    enabled: true,
+                                                    format: '<span style="font-size: 1.2em"><b>{point.name}</b></span><br>' +
+                                                        '<span style="opacity: 0.6">{point.y}</span>',
+                                                    connectorColor: 'rgba(128,128,128,0.5)'
+                                                }
+                                            }
+                                        },
+
+                                        series: [{
+                                            name: 'Rating',
+                                            allowPointSelect: true,
+                                            keys: ['name', 'y', 'selected', 'sliced'],
+                                            data: Datal,
+                                            showInLegend: true
+                                        }]
+                                    });
+
+                                    index++;
+
+                                })
+                            }
+                        }
+                      
+
+                    }
+                    else {
+                        $('#div-Chart').html(resp.Data); $('#div-Chart').addClass("text-danger");
+                        //  CreateToasterMessage("Error", response.Message, response.StatusType);
+                        $('#global-loader').css('background', 'transparent').css('display', 'none');
+                    }
+                },
+                error: function (req, error) {
+                    if (error === 'error') { error = req.statusText; }
+                    var errormsg = 'There was a communication error: ' + error;
+                    $('#div-Chart').html(errormsg); $('#div-Chart').addClass("text-danger");
+                    $('#global-loader').css('background', 'transparent').css('display', 'none');
+                }
+            });
+        }
+
+
+    </script>
+}

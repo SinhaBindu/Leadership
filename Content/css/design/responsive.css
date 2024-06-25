@@ -1,0 +1,166 @@
+﻿@media(max-width:1332px) {
+    .manage-btn {
+        margin-top: 0px;
+    }
+}
+
+@media all and (max-width: 1220px) {
+}
+
+@media all and (max-width: 960px) {
+    .tablist {
+        width: 40%;
+    }
+
+    .tabdetail {
+        width: 58%;
+    }
+
+    .tabgraph {
+        float: left;
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+@media all and (max-width: 900px) {
+}
+
+@media all and (max-width: 900px) {
+    .All-Project h2 {
+        font-size: 25px;
+    }
+
+    .customer-detail {
+        margin: 20px 2% 10px;
+        width: 46%;
+    }
+
+    .clg-main {
+        float: left;
+        width: 80%;
+    }
+}
+
+@media all and (max-width: 768px) {
+    .All-Project h2 {
+        font-size: 23px;
+    }
+
+    .course-matter {
+        min-height: 150px;
+    }
+
+    .college-all h3 {
+        font-size: 20px;
+        letter-spacing: 0.8px;
+    }
+
+    .college-all p {
+        font-size: 14px;
+        line-height: 21px;
+    }
+
+    .header-title {
+        font-size: 25px;
+    }
+
+    .btsp-table {
+        overflow-x: scroll;
+    }
+
+    .list-group h3 {
+        font-size: 18px !important;
+    }
+}
+
+@media all and (max-width: 600px) {
+    .customer-detail {
+        margin: 20px 2% 10px;
+        width: 96%;
+    }
+
+    .All-Project h2 {
+        font-size: 20px;
+    }
+
+    .course-matter {
+        min-height: unset;
+    }
+
+    .college-all h3 {
+        font-size: 18px;
+        letter-spacing: 0.7px;
+    }
+
+    .college-all p {
+        font-size: 13px;
+        line-height: 20px;
+    }
+
+    .save_btn {
+        padding: 4px 16px;
+        font-size: 14px;
+    }
+
+    .quick_btnz {
+        font-size: 14px;
+        padding: 4px 10px;
+    }
+
+    .header-title {
+        font-size: 22px;
+    }
+
+    .tabdetail h2 .titler, .tabdetail h2 .fa {
+        display: none;
+    }
+
+    .last-update {
+        float: left;
+    }
+
+    .point-digit {
+        font-size: 18px;
+        padding: 4px 9px;
+    }
+
+    .tabdetail p {
+        font-size: 14px;
+    }
+}
+
+@media all and (max-width: 550px) {
+    .save_btn {
+        padding: 4px 12px;
+        font-size: 13px;
+    }
+
+    .quick_btnz {
+        font-size: 13px;
+        padding: 4px 10px;
+    }
+
+    .All-Project h2 {
+        font-size: 18px;
+    }
+
+    .list-group h3 {
+        font-size: 16px !important;
+    }
+}
+
+@media all and (max-width: 480px) {
+    .list-group h3 {
+        font-size: 15px !important;
+    }
+
+    .point-digit {
+        font-size: 17px;
+        padding: 4px 8px;
+    }
+
+    .tabdetail p {
+        font-size: 13px;
+    }
+}

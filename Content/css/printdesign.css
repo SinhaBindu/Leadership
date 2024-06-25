@@ -1,0 +1,233 @@
+﻿body {
+    -webkit-print-color-adjust: exact !important;
+}
+
+.lbl {
+    font-weight: bold;
+    -webkit-print-color-adjust: exact !important;
+    background: #ECECEC;
+    border: 1px solid #DBDBDB;
+    font-size: 11px;
+    padding: 4px 10px;
+}
+
+thead tr th.lbl {
+    font-size: 11px !important;
+}
+.tar-sign {
+    width: 70%;
+}
+.lblr {
+    text-align: center;
+    color: #fff;
+    background: #25476A;
+    font-size: 15px;
+    padding: 6px 0;
+}
+
+.inner-tbl {
+    width: 98%;
+    font-weight: normal;
+    font-size: 10px;
+    margin-left: 1%;
+}
+
+    .inner-tbl tr {
+        height: 25px;
+    }
+
+        .inner-tbl tr th {
+            font-weight: bold !important;
+            -webkit-print-color-adjust: exact !important;
+            background: #ECECEC;
+            vertical-align: middle !important;
+            padding: 2px 4px 1px 10px !important;
+            width: 15%;
+            color: #222228 !important;
+            border: 1px solid #DBDBDB;
+        }
+
+        .inner-tbl tr td {
+            padding: 3px 4px 1px 10px !important;
+            border: 1px solid #DBDBDB;
+        }
+
+.tar-hr {
+    clear: both;
+    height: 1px;
+    background: #EDEDED;
+}
+
+.tar-border {
+    /*border: #86B3F6 3px solid;*/
+    width: 100%;
+    /*text-align: center;*/
+    padding-top: 5px;
+}
+
+.lbl1 {
+    font-weight: bold;
+    -webkit-print-color-adjust: exact !important;
+    background: #ECECEC;
+    border: 1px solid #DBDBDB;
+    font-size: 12px;
+    padding: 4px 0 4px 10px;
+}
+
+.htxt {
+    font-weight: bold;
+    font-size: 12px;
+    text-align: left;
+}
+
+.tar-border-print {
+    font-weight: bold;
+    font-size: 12px;
+    text-align: left;
+    /*border-top: 3px solid #86B3F6;*/
+    padding: 6px 0;
+}
+
+table {
+    padding: 0px;
+    margin: 0px;
+    cellpadding: 0;
+    cellspacing: 0;
+}
+
+.table-spacer {
+    display: block;
+    width: 98%;
+    margin-left: 1%;
+    margin: auto;
+}
+
+.status-approve {
+    color: #fff;
+    background: #00C432;
+    padding: 1px 5px;
+    border-radius: 2px;
+}
+
+.call-text {
+    font-size: 16px;
+}
+
+.lbl-pad {
+    padding-left: 10px;
+    font-size: 11px;
+}
+
+.lbl-pad2 {
+    padding: 4px 10px;
+    font-size: 11px;
+}
+@media all and (max-width: 768px) {
+    .tar-broad-spacer {
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+}
+@media all and (max-width: 600px) {
+    .call-text {
+        font-size: 14px;
+    }
+
+    .lbl, .lbl-pad2, .lbl1 {
+        font-size: 10px;
+        padding: 3px 7px;
+    }
+
+    .lbl-pad {
+        padding-left: 7px;
+        font-size: 10px;
+    }
+
+    thead tr th.lbl {
+        font-size: 10px !important;
+    }
+}
+
+@media all and (max-width: 500px) {
+    .call-text {
+        font-size: 12px;
+    }
+
+    .lbl, .lbl-pad2, .lbl1 {
+        font-size: 9px;
+        padding: 3px 5px;
+    }
+
+    .lbl-pad {
+        padding-left: 5px;
+        font-size: 9px;
+    }
+
+    thead tr th.lbl {
+        font-size: 9px !important;
+    }
+}
+@media all and (max-width: 440px) {    
+
+    .lbl, .lbl-pad2, .lbl1 {
+        font-size: 9px;
+        padding: 3px 3px;
+    }
+
+    .lbl-pad {
+        padding-left: 3px;
+        font-size: 9px;
+    }
+
+    thead tr th.lbl {
+        font-size: 9px !important;
+    }
+}
+
+@media print {
+    body {
+        -webkit-print-color-adjust: exact !important;
+        color: #000;
+    }
+
+    .inner-tbl tr th {
+        -webkit-print-color-adjust: exact !important;
+        background: #ECECEC;
+    }
+
+    .lbl {
+        -webkit-print-color-adjust: exact !important;
+        background: #ECECEC;
+        color: #000 !important;
+    }
+
+    .lbl1 {
+        -webkit-print-color-adjust: exact !important;
+        background: #ECECEC;
+    }
+
+    .form-group .print-margin {
+        margin-top: 20px !important;
+    }
+
+    .status-approve {
+        color: #fff;
+        -webkit-print-color-adjust: exact !important;
+        background: #00C432;
+        padding: 1px 5px;
+        border-radius: 2px;
+    }
+
+    /*.tar-border {
+        border: #25476A 3px solid;
+    }*/
+
+    .tar-border-print {
+        border-top: 3px solid #25476A;
+    }
+
+    .lblr {
+        -webkit-print-color-adjust: exact !important;
+        background: #25476A;
+    }
+}

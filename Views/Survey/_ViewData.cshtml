@@ -1,0 +1,112 @@
+﻿@model  KGBV_JH.Models.QesRes
+@using KGBV_JH.Models;
+
+@{
+    ViewBag.Title = "Attendance And HR";
+    ViewBag.TitleIcon = "fa fa-user";
+    ViewBag.SemiTitle = "HR";
+    ViewBag.SemiTitleLink = "~/";
+    string IsSadmin = string.Empty;
+    // var Index = 0;
+
+    <style>
+        .q-section {
+            border: 2px solid #FAFAFA;
+            padding: 7px 0;
+        }
+        .q-title {
+            background: #1AB96E;
+            padding: 5px 10px;
+            font-size: 16px;
+            color: #fff;
+            margin: -7px 0 10px -10px;
+            width: 102%;
+        }
+        .q-s-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+    </style>
+}
+
+@helper BindQueston(List<KGBV_JH.Models.FormModel> list)
+{
+    int sn = 1;
+    if (list != null)
+    {
+        var ii = 0;
+        Model.Qlist = list;
+        foreach (var item in Model.Qlist.ToList())
+        {
+            if (item.ChildQuestionList != null && item.ChildQuestionList.Count() > 0)
+            {
+                list.AddRange(item.ChildQuestionList.ToList());
+                Model.Qlist = list;
+            }
+        }
+        var prvQ = ""; var pvsection = "";
+        foreach (var item in Model.Qlist.ToList().OrderBy(x => x.QuestionCode))
+        {
+            if (Model.Id > 0)
+            {
+                prvQ = item.QuestionCode;
+                var Isdis = string.IsNullOrWhiteSpace(item.ParentQuestionCode) == false ? "style=display:none;" : "style=display:block;";
+                <div class="@item.ParentQuestionCode">
+                    <div class="form-group">
+                        @*<span class="control-label col-md-2" >@item.Question</span>*@                        @{
+                            for (int i = 0; i < item.OptionList.Count; i++)
+                            {
+                                if (item.OptionList[i].Id > 0)
+                                {
+                                    <div class="col-md-12 q-section">
+                                        @if ((item.SectionType.Trim()).ToLower() != (pvsection.Trim()).ToLower() || pvsection == "")
+                                        {
+                                            <div class="col-md-12 q-title"><strong>@item.SectionType</strong></div>
+                                        }
+                                        @if (item.OptionList[i].QuestionCode == prvQ)
+                                        {
+                                            <span class="control-label col-md-12 q-s-title">@(sn++ + ".")&nbsp; @item.QuestionCode  @item.Question</span>
+                                        }
+                                        <label class="control-label col-md-6">@item.OptionList[i].Text</label>
+                                        <label class="control-label col-md-6">
+                                            <strong>@item.OptionList[i].LabelName1 : &nbsp; @item.OptionList[i].InputText</strong>&nbsp;
+                                            @{
+                                                if (!string.IsNullOrWhiteSpace(item.OptionList[i].InputText1))
+                                                {
+                                                    <strong>@item.OptionList[i].LabelName2 : &nbsp; @item.OptionList[i].InputText1</strong>
+                                                }
+                                            }
+
+                                        </label>
+                                    </div>
+                                    prvQ = "";
+                                    pvsection = (item.SectionType.Trim());
+                                }
+                                else
+                                {
+                                    prvQ = item.OptionList[i].QuestionCode;
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+                ii++;
+            }
+        }
+    }
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">Year : <strong>@(KGBV_JH.Models.CommonModel.GetFinancialYearList()?.FirstOrDefault(x => x.Value ==Model.YearId.ToString()).Text)</strong></div>
+        <div class="col-md-6">Quarterly : <strong>@(KGBV_JH.Models.CommonModel.GetQuarterList(Model.YearId.Value)?.FirstOrDefault(x => x.Value ==Model.FrequencyId.ToString()).Text)</strong></div>
+        <br />
+        @{
+            if (Model != null)
+            {
+                @BindQueston(Model.Qlist)
+            }
+        }
+    </div>
+</div>

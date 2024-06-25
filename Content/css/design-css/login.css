@@ -1,0 +1,386 @@
+﻿body {
+    margin: 0px;
+    padding: 0px;
+    /*background: #F6F6F6;*/
+    background: #E6E8EA;
+    animation: fadein 2s;
+    -moz-animation: fadein 2s;
+    -webkit-animation: fadein 2s;
+    -o-animation: fadein 2s;
+}
+
+.breaker {
+    clear: both;
+    height: 0.1px;
+}
+
+.break {
+    clear: both;
+    height: 10px;
+}
+.tar-distance {
+    display: block;
+    margin: auto;
+    max-width: 600px;
+    padding: 10px;
+    margin-top: 30px;
+}
+.forgot-break {
+    clear: both;
+    height: 5px;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+.card-login {
+    display: block;
+    height: calc(85vh - 40px)
+}
+
+.login-header {
+    display: flex;
+    clear: both;
+    text-align: center;
+    padding: 5px 0 0;
+    background: #E36F1E;
+    justify-content: space-between;
+    align-items: center;
+}
+.care-india-logo {
+    width: 120px;
+    margin-left: 20px
+}
+.pi-logo {
+    width: 70px;
+    margin-right: 20px
+}
+.logo-manage {
+    display: inline-block;
+    padding: 7px 10px;
+    background: #F46900;
+    border-radius: 100%;
+    text-align: center;
+}
+.care-logo {
+    width: 40px; 
+}
+
+.card-home-btn {
+    float: right;
+    padding: 2px 12px;
+    background: #007ECB;
+    color: #fff;
+    font-size: 14px;
+    margin: 0px 15px 0 0;
+}
+
+    .card-home-btn:hover {
+        background: #0063A0;
+        text-decoration: none;
+        color: #fff;
+    }
+
+.login-header h3 {
+    font-size: 28px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+    color: #fff;
+    text-align: center;
+    margin: 0px;
+    /*margin-top: 20px;
+    padding-bottom: 20px;*/
+    /*background: url(../../images/title-bg.png) center bottom no-repeat;*/
+}
+
+.div-login {
+    /*max-width: 360px;*/
+    display: flex;
+    max-width: 400px;
+    margin: auto;
+    margin-top: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 40px 0 rgba(62,57,107,.07), 0 2px 9px 0 rgba(62,57,107,.06);
+    border-radius: 20px;
+    background: #fff;
+}
+
+    .div-login h2 {
+        font-size: 25px;
+        margin-bottom: 10px;
+        color: #007135;
+        text-align: center;
+        letter-spacing: 1px;
+        margin-top: 20px;
+        font-weight: bold;
+    }
+
+    .div-login h3 {
+        font-size: 15px;
+        text-transform: uppercase;
+        margin-bottom: 7px;
+        color: #333;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .div-login p {
+        font-size: 12px;
+        color: #777;
+        text-align: center;
+        padding: 5px 10px;
+        margin-bottom: 15px;
+    }
+
+    .div-login a {
+        color: #002F16
+    }
+
+    .btn-card {
+        display: block;
+        padding: 7px 20px;
+        background: #007135;
+        color: #fff;
+        width: 100%;
+        font-size: 16px;
+        border-radius: 18px;
+        margin-top: 0px;
+    }
+
+    .btn-card:hover {
+        background: #0060C1;
+        color: #fff;
+    }
+
+.login-card {
+    padding: 10px 10px 10px;
+    border-radius: 20px;
+    flex: 1;
+    margin: 0 0%;
+}
+.login-img {
+    float: left;
+    width: 50%;
+}
+.login-img-manage {
+    margin: 10px
+}
+.border-radius-img {
+    border-radius: 20px 0 0 20px !important;
+}
+    .div-login label {
+        text-align: left;
+    }
+
+.checkbox {
+    margin-top: 0px;
+    margin-left: 20px;
+}
+
+.checkbox .input-checkbox {
+    float: left;
+    margin-top: 1px;
+    margin-right: 2px;
+}
+.check-title {
+    /*float: left;*/
+    margin-left: 4px;
+    margin-top: 3px;
+    color: #777;
+}
+.div-login .text-danger {
+    text-align: left;
+    font-size: 12px;
+}
+
+.div-login .checkbox {
+    font-size: 12px;
+    color: #757575;
+}
+
+.card-icon {
+    float: right;
+    font-size: 18px;
+    color: #757575;
+    position: relative;
+    margin: -28px 20px 0 0;
+}
+.card-icon2 {
+    float: right;
+    font-size: 18px;
+    color: #757575;
+    position: relative;
+    margin: -33px 20px 0 0;
+}
+
+.card-login-icon {
+    width: 70px;
+    display: block;
+    margin: auto;
+    border-radius: 100%
+}
+
+.form-card {
+    display: block;
+    width: 100%;
+    border-radius: 20px;
+    padding: 5px 12px;
+    border: none;
+    font-size: 14px;
+    border: 1px solid #EDEDEF;
+    transition: border-width 0.6s linear;
+    box-sizing: border-box;
+    /*box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.06);*/
+}
+
+    /*.form-card:hover {
+        box-shadow: inset 1px 2px 8px rgba(0, 0, 0, 0.02);
+    }*/
+
+    .form-card:focus {
+        border: 1px solid #EDEDEF;
+        outline: none;
+        /*box-shadow: inset 1px 2px 4px rgba(0, 0, 0, 0.01), 0px 0px 8px rgba(0, 0, 0, 0.2);*/
+    }
+
+#loginForm {
+    display: block;
+    width: 80%;
+    margin: auto;
+}
+
+.footer {
+    text-align: center;
+    padding: 10px 0;
+    background: #fff;
+    margin-top: 10px;
+}
+
+    .footer p {
+        margin: 0px;
+        color: #000;
+        font-size: 14px;
+    }
+
+@media all and (max-width: 1024px) {
+    .div-login {
+        flex-direction: column;
+        max-width: 450px
+    }
+    .card-login {
+        display: block;
+        height: auto
+    }
+}
+
+@media all and (max-width: 768px) {
+    .login-card {
+        padding: 20px 3% 10px;
+        border-radius: 20px;
+        width: 100%;
+        height: auto
+    }
+
+    /*.div-login {
+        background: none;
+    }*/
+
+    .login-header h3 {
+        font-size: 28px;
+    }
+
+    .div-login h2 {
+        font-size: 27px;
+    }
+    .login-img {
+        display: none
+    }
+
+    .footer {
+        margin-top: 40px;
+    }
+}
+
+@media all and (max-width: 650px) {
+    .login-header h3 {
+        font-size: 26px;
+    }
+
+    .div-login h2 {
+        font-size: 25px;
+    }
+}
+
+@media all and (max-width: 520px) {
+    .login-header h3 {
+        font-size: 25px;
+    }
+
+    .div-login h2 {
+        font-size: 23px;
+    }
+
+    .care-logo {
+        width: 30px;
+    }
+
+    #loginForm {
+        width: 90%;
+    }
+}
+
+@media all and (max-width: 420px) {
+    .login-header h3 {
+        font-size: 23px;
+    }
+
+    .div-login h2 {
+        font-size: 21px;
+    }
+
+    #loginForm {
+        width: 100%;
+    }
+}

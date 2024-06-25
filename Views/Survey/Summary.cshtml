@@ -1,0 +1,84 @@
+﻿@model  Leadership.Models.QesRes
+@using Leadership.Models
+@*@model IEnumerable<KGBV_JH.Models.QesRes>*@
+@{
+    ViewBag.Title = "Leadership Pizza Self-Assessment";
+    ViewBag.TitleIcon = "fa fa-user";
+    ViewBag.SemiTitle = "Leadership Pizza Self-Assessment (Add)";
+    ViewBag.SemiTitleLink = "/Survey/Add";
+
+}
+<style>
+    .panel-body {
+        padding: 0px 20px 5px;
+    }
+    
+</style>
+<div id="page-content">
+    <div class="genral-form">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel">
+                    <div class="panel-spacer">
+                        <p class="bord-btm pad-ver text-main text-bold">
+                            <i class="fa fa-list spacerright2"></i>@ViewBag.Title
+                        </p>
+                    </div>
+                    @using (Html.BeginForm("GetSummary", "Survey", FormMethod.Post, new { @id = "formid", @class = "panel-body form-horizontal form-padding loader" }))
+                    {
+                        @*<div class="manage-bg">
+                                <div class="col-lg-2">
+                                </div>
+
+                                <div class="mark-devide2"></div>
+                                <div class="breaker"></div>
+                            </div>*@
+                    }
+                    <div class="col-md-12">@Html.Partial("_Alerts")</div>
+                    <div class="panel-body">
+                        <div class="row" id="div-main">
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-12" id="ChartSummary" style="height:500px;">
+
+                            </div>
+                            <div class="col-sm-3" id="divquest" style="font-size: 12px; font-weight: bold; color: #9133a1"></div>
+                            <div class="col-sm-9" id="ChartSummary1">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    @*<script src="https://code.highcharts.com/modules/accessibility.js"></script>*@
+
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/coloraxis.js"></script>
+    <script src="~/Scripts/App/ChartSummary.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+
+        });
+
+
+
+
+    </script>
+}

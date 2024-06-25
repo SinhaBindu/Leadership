@@ -1,0 +1,104 @@
+﻿
+@media (max-width:991px) {
+    .mt-md-10
+
+{
+    margin-top: 10px;
+}
+
+}
+
+.text-white {
+    color: #fff;
+}
+
+.center {
+    margin-top: 50px;
+}
+
+.modal-header {
+    padding-bottom: 10px;
+}
+
+.modal-footer {
+    padding: 0;
+}
+
+    .modal-footer .btn-group button {
+        height: 40px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border: none;
+        border-right: 1px solid #ddd;
+    }
+
+    .modal-footer .btn-group:last-child > button {
+        border-right: 0;
+    }
+
+.q-title {
+    /*background: #1AB96E;*/
+    background: #AD4DBE;
+    color: #fff;
+    font-size: 17px;
+    padding: 7px 12px;
+}
+
+.q-design {
+    background: #FAFAFA;
+    margin: 0 10px !important;
+}
+
+.control-label {
+    padding: 20px 10px;
+    font-weight: bold;
+    text-align: left !important;
+}
+
+.q-check-input {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+    .q-check-input input[type="checkbox"] {
+        margin-right: 10px;
+        margin-left: 5px;
+        margin-bottom: 10px;
+        zoom: 1.2;
+        margin-top: 11px
+    }
+
+    .q-check-input input[type="radio"] {
+        margin-right: 5px;
+        zoom: 1.2;
+    }
+
+.q-lable {
+    margin-right: 15px;
+    margin-top: 9px
+}
+
+.q-check-input input[type="text"] {
+    width: 170px;
+    margin-right: 15px;
+}
+
+@media screen and (max-width: 768px) {
+    .q-check-input input[type="text"] {
+        width: 100%;
+        margin-right: 0px;
+    }
+}
+
+.btn-draft {
+    display: block;
+    cursor: pointer;
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 795;
+    opacity: 1;
+    transition: all 0.15s;
+}

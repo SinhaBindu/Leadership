@@ -1,0 +1,10 @@
+.product_slider3 .amazingcarousel-prev {
+	right: 50px;
+	bottom: -33px;
+	z-index: 3;
+}
+.product_slider3 .amazingcarousel-next {
+	right: 35px;
+	bottom: -33px;
+	z-index: 3;
+}

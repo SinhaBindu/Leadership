@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html translate="no">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@*Leadership Pizza Self-Assessment*@</title>
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/Content/AdminCSS")
+
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/css/jquery-ui-timepicker-addon.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    @*<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />*@
+    <link href="~/Content/plugins/datatables/media/css/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="~/Content/plugins/datatables/extensions/Responsive/css/responsive.dataTables.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" type='text/css' />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <base href="@Leadership.Models.CommonModel.GetBaseUrl()" />
+</head>
+<body>
+    <div id="container" class="effect aside-float aside-bright mainnav-lg">
+        @Html.Partial("_Header")
+        <div class="boxed">
+            <div id="content-container">
+                @Html.Partial("_BreadCrumb")
+                @RenderBody()
+
+                <div id="panel-load" class="panel-overlay" style="display:none;">
+                    <div class="panel-overlay-content pad-all unselectable">
+                        <span class="panel-overlay-icon text-main">
+                            <i class="demo-psi-repeat-2 spin-anim icon-2x"></i>
+                        </span>
+                        <h4 class="panel-overlay-title"></h4>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            @Html.Partial("_Navigation")
+
+        </div>
+        @Html.Partial("_Footer")
+    </div>
+
+    @Scripts.Render("~/bundles/AdminScript")
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Content/js/jquery-ui-timepicker-addon.min.js"></script>
+    @*<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>*@
+    <script src="~/Content/plugins/datatables/media/js/jquery.dataTables.js"></script>
+    <script src="~/Content/plugins/datatables/media/js/dataTables.bootstrap.js"></script>
+    <script src="~/Content/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
+    @*<script src="~/Content/js/demo/tables-datatables.js"></script>*@
+
+    <script src="https://unpkg.com/bootstrap-switch@3.3.4/dist/js/bootstrap-switch.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    @RenderSection("scripts", required: false)
+    <script>
+        function ClearResults() {
+            $("#DivDetails").empty();
+        }
+    </script>
+</body>
+</html>

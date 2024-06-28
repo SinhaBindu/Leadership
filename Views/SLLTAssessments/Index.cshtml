@@ -2,9 +2,9 @@
 @using Leadership.Models
 @*@model IEnumerable<KGBV_JH.Models.QesRes>*@
 @{
-    ViewBag.Title = "SLTT Assessment";
+    ViewBag.Title = "SLLT Assessment";
     ViewBag.TitleIcon = "fa fa-user";
-    ViewBag.SemiTitle = "SLTT Assessment (Add)";
+    ViewBag.SemiTitle = "SLLT Assessment (Add)";
     ViewBag.SemiTitleLink = "/SLLTAssessments/Add";
 
 }
@@ -20,8 +20,8 @@
                 <div class="panel">
                     <div class="panel-spacer">
                         @*<p class="bord-btm pad-ver text-main text-bold">
-                            <i class="fa fa-list spacerright2"></i>@ViewBag.Title
-                        </p>*@
+                                <i class="fa fa-list spacerright2"></i>@ViewBag.Title
+                            </p>*@
                     </div>
                     @using (Html.BeginForm("GetIndex", "SLLTAssessments", FormMethod.Post, new { @id = "tblList-frm", @class = "panel-body form-horizontal form-padding loader" }))
                     {
@@ -145,7 +145,7 @@
                                 var gpy = groupBy(Datalist, "Reportedby");
                                 $.each(gpy, function (item, row) {
                                     var htmlul = "<dl>";
-                                  
+
                                     var chart;
                                     Datal = []; QList = []; totalAns = 0, totalIncorrect = 0, TAns = 0, TIncorrect = 0;
                                     var div_Chart = 'div_Chart' + index;
@@ -157,23 +157,24 @@
                                         QList.push(Datafilter[i].Question);
                                         totalAns += Datafilter[i].Ans == 1 ?? Datafilter[i].Ans;
                                         totalIncorrect += Datafilter[i].Ans == 0 ?? Datafilter[i].Ans;
-                                        htmlul += "<dt>" + Datafilter[i].QuestionCode +". " + Datafilter[i].Question + "</dt>";
-                                        htmlul += "<dd>" + (Datafilter[i].Ans == 1 ? " <strong style='color:#008000'>Correct : " + Datafilter[i].Ans : "</strong> <strong style='color:#FF0000'>Incorrect : " + Datafilter[i].Ans) + "</strong></dd>";
+                                        htmlul += "<dt>" + Datafilter[i].QuestionCode + ". " + Datafilter[i].Question + "</dt>";
+                                        //htmlul += "<dd>" + (Datafilter[i].Ans == 1 ? " <strong style='color:#008000'>Correct : " + Datafilter[i].Ans : "</strong> <strong style='color:#FF0000'>Incorrect : " + Datafilter[i].Ans) + "</strong></dd>";
+                                        htmlul += Datafilter[i].Ans == 1 ? "<dd>" + " <strong style='color:#008000'>Correct : " + Datafilter[i].ResponseCode + "</strong> </dd>" : "";
                                         // var clr = Datafilter[i].Ans == 0 ? '#FF0000' : '#008000';
                                         //Datal.push({ name: Datafilter[i].Question, y: Datafilter[i].Ans, color: clr });
                                     }
                                     htmlul += "</dl>";
 
-                                    div_multiple = div_multiple + "<div>" + htmlul +"</div></div>";
-                                   // $(div_multiple).append(htmlul);
+                                    div_multiple = div_multiple + "<div>" + htmlul + "</div></div>";
+                                    // $(div_multiple).append(htmlul);
                                     $('#div-main').append(div_multiple);
 
-                                   // $('#sub-list').html(htmlul);
+                                    // $('#sub-list').html(htmlul);
                                     TAns = totalAns; TIncorrect = totalIncorrect;
                                     totalAns = (totalAns * 100) / (Datafilter.length)
                                     totalIncorrect = (totalIncorrect * 100) / (Datafilter.length)
                                     Datal.push({ name: 'Correct', y: totalAns, color: '#008000' });
-                                    Datal.push({ name: 'Incorrect', y: totalIncorrect, color: '#FF0000' });
+                                    // Datal.push({ name: 'Incorrect', y: totalIncorrect, color: '#FF0000' });
                                     //Highcharts.setOptions({
                                     //    colors: Highcharts.map(Highcharts.getOptions().colors, function (color) {
                                     //        return {
@@ -206,10 +207,11 @@
                                             align: 'center'
                                         },
                                         subtitle: {
-                                            text: '<b> Marks Correct/Incorrect : ' + TAns + '/' + TIncorrect + '</b>',
+                                            //text: '<b> Marks Correct/Incorrect : ' + TAns + '/' + TIncorrect + '</b>',
+                                            text: '<b> Marks Correct : ' + TAns +'</b>',
                                             align: 'center',
-                                                style: {
-                                                    fontSize: 12
+                                            style: {
+                                                fontSize: 12
                                             },
                                         },
                                         tooltip: {
@@ -230,7 +232,7 @@
                                             shadow: true,
                                             labelFormatter: function () {
                                                 //return '<div class="' + this.name + '-arrow"></div><span style="font-family: \'Advent Pro\', sans-serif; font-size:12px">' + this.name + '</span><br/><span style="font-size:12px; color:#ababaa">  ' + (this.options.y == 1 ? " Answers Correct : " :"Incorrect : ") +' ' + this.options.y + '</span>';
-                                                return '<div class="' + this.name + '-arrow"></div><span style="font-family: \'Advent Pro\', sans-serif; font-size:12px">' + this.name + '</span><br/><span style="font-size:12px; color:#ababaa">   ' + (this.options.y.toFixed(2)) +' % </span>';
+                                                return '<div class="' + this.name + '-arrow"></div><span style="font-family: \'Advent Pro\', sans-serif; font-size:12px">' + this.name + '</span><br/><span style="font-size:12px; color:#ababaa">   ' + (this.options.y.toFixed(2)) + ' % </span>';
                                             }
                                         },
                                         accessibility: {
@@ -265,7 +267,7 @@
                                         }]
                                     });
 
-                                   
+
                                     index++;
 
                                 })

@@ -1,13 +1,26 @@
 ﻿<header id="navbar">
     <div id="navbar-container" class="boxed">
         <div class="navbar-header">
-            <a href="~/Competency/Summary" class="navbar-brand">
-                @*<img src="~/Content/images/white-care-icon.png" class="brand-icon" />*@
-                <img src="~/Content/images/pci.png" class="brand-icon" alt="" />
-                <div class="brand-title">
-                    <span class="brand-text">Competency </span>
-                </div>
-            </a>
+            @if (Leadership.Models.CommonModel.IsRoleLogin() == "all")
+            {
+                <a href="~/SLLTAssessments/Summary" class="navbar-brand">
+                    @*<img src="~/Content/images/white-care-icon.png" class="brand-icon" />*@
+                    <img src="~/Content/images/pci.png" class="brand-icon" alt="" />
+                    <div class="brand-title">
+                        <span class="brand-text">SLLT Assessment </span>
+                    </div>
+                </a>
+            }
+           else
+            {
+                <a href="~/SLLTAssessments/Index" class="navbar-brand">
+                    @*<img src="~/Content/images/white-care-icon.png" class="brand-icon" />*@
+                    <img src="~/Content/images/pci.png" class="brand-icon" alt="" />
+                    <div class="brand-title">
+                        <span class="brand-text">SLLT Assessment </span>
+                    </div>
+                </a>
+            }
         </div>
         @*<a href="#"><img src="~/Content/images/jepc-logo.png" alt="Logo" class="logo-icon"></a>*@
         <div class="navbar-content">

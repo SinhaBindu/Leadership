@@ -30,7 +30,7 @@ namespace Leadership.Controllers
             try
             {
                 User = CommonModel.IsRoleLogin();
-                ds = SP_Model.GetSPScoreMarkAnswer(User);
+                ds = SP_Model.GetSPScoreMarkAnswerSLLT(User);
                 bool IsCheck = false;
                 if (ds.Tables.Count > 0)
                 {
@@ -62,7 +62,7 @@ namespace Leadership.Controllers
             try
             {
                 User = CommonModel.IsRoleLogin();
-                ds = SP_Model.GetSP_ScorersSummaryMarks(User);
+                ds = SP_Model.GetSP_ScorersSummaryMarksSLLT(User);
                 if (ds.Tables.Count > 0)
                 {
                     tbllist = (ds.Tables[0]);
@@ -86,7 +86,7 @@ namespace Leadership.Controllers
             try
             {
                 User = CommonModel.IsRoleLogin();
-                ds = SP_Model.GetQuestionSummaryMarks(User);
+                ds = SP_Model.GetQuestionSummaryMarksSLLT(User);
                 bool IsCheck = false;
                 if (ds.Tables.Count > 0)
                 {
@@ -309,6 +309,23 @@ namespace Leadership.Controllers
                                                 }
                                             }
                                             else if (item.OptionList[i].SelectedItem != true && item.ControlType.ToLower() == "textbox")
+                                            {
+                                                if (!string.IsNullOrWhiteSpace(item.OptionList[i].InputText))
+                                                {
+                                                    Resptbl.ResponseCode = item.OptionList[i].Value;
+                                                    Resptbl.InputValue = item.OptionList[i].InputText;
+                                                    isSaveChild = true;
+                                                }
+                                                else
+                                                {
+                                                    var ans = asnlist.FirstOrDefault(x => x.QuestionCode == item.QuestionCode && x.QuestionOption_fk == item.OptionList[i].OptionId_Pk);
+                                                    if (ans != null)
+                                                    {
+                                                        db.tbl_SurveyAnswer.Remove(ans);
+                                                    }
+                                                }
+                                            }
+                                            else if (item.OptionList[i].SelectedItem != true && item.ControlType.ToLower() == "textarea")
                                             {
                                                 if (!string.IsNullOrWhiteSpace(item.OptionList[i].InputText))
                                                 {

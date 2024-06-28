@@ -46,10 +46,10 @@
                             {
                                 @*<li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>Summary</span>", "Summary", "Survey")</li>*@
                                 @*@Html.ActionLinkMenu("<i class='fa fa-home'></i> <span class=\"menu-title\">Dashboard</span>", "Summary", "Survey")*@
-                                @Html.ActionLinkMenu("<i class='fa fa-home'></i> <span class=\"menu-title\">Dashboard</span>", "Summary", "Competency")
-                                @Html.ActionLinkMenu("<i class='fa fa-tasks'></i> <span class=\"menu-title\">Scorer Summary</span>", "ScorerSummary", "Competency")
-                                @Html.ActionLinkMenu("<i class='fa fa-home'></i> <span class=\"menu-title\">SLTT Dashboard</span>", "Summary", "SLLTAssessments")
-                                @Html.ActionLinkMenu("<i class='fa fa-tasks'></i> <span class=\"menu-title\">SLTT Scorer Summary</span>", "ScorerSummary", "SLLTAssessments")
+                                @*@Html.ActionLinkMenu("<i class='fa fa-home'></i> <span class=\"menu-title\">Dashboard</span>", "Summary", "Competency")
+                                @Html.ActionLinkMenu("<i class='fa fa-tasks'></i> <span class=\"menu-title\">Scorer Summary</span>", "ScorerSummary", "Competency")*@
+                                @Html.ActionLinkMenu("<i class='fa fa-home'></i> <span class=\"menu-title\"> Dashboard</span>", "Summary", "SLLTAssessments")
+                                @*@Html.ActionLinkMenu("<i class='fa fa-tasks'></i> <span class=\"menu-title\"> Summary Score</span>", "ScorerSummary", "SLLTAssessments")*@
 
                             }
 
@@ -65,9 +65,9 @@
                                     @*<li>@Html.ActionLinkMenu("<i class='fa fa-plus'></i> <span>Ona Infra</span>", "OnaInfra", "Infra")</li>*@
                                     @*<li>@Html.ActionLinkMenu("<i class='fa fa-plus'></i> <span>Survey</span>", "Add", "Survey")</li>
                     <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>Result</span>", "Index", "Survey")</li>*@
-                                    <li>@Html.ActionLinkMenu("<i class='fa fa-plus'></i> <span>Survey</span>", "Add", "Competency")</li>
-                                    <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>Result</span>", "Index", "Competency")</li>
-                                    <li>@Html.ActionLinkMenu("<i class='fa fa-plus'></i> <span>SLTT Survey</span>", "Add", "SLLTAssessments")</li>
+                                    @*<li>@Html.ActionLinkMenu("<i class='fa fa-plus'></i> <span>Survey</span>", "Add", "Competency")</li>*@
+                                    @*<li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>Result</span>", "Index", "Competency")</li>*@
+                                    <li>@Html.ActionLinkMenu("<i class='fa fa-plus'></i> <span>Survey</span>", "Add", "SLLTAssessments")</li>
                                     <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>Result</span>", "Index", "SLLTAssessments")</li>
                                     @*@if (Leadership.Models.CommonModel.IsRoleLogin() == "all")
                     {

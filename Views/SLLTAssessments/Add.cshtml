@@ -2,7 +2,7 @@
 @*@model  List<Leadership.Models.HRModel>*@
 @using Leadership.Models;
 @{
-    ViewBag.Title = "Questions: SLLTAssessments";
+    ViewBag.Title = "Questions: SLLT Assessments";
     // ViewBag.TitleIcon = "fa fa-user";
     //ViewBag.SemiTitle = "Leadership Pizza Self-Assessment";
     // ViewBag.SemiTitleLink = "~/";
@@ -74,28 +74,28 @@
                         @onchange = "OnChgTargetcontrol('Qlist_" + ii + "__OptionList_" + i + "__InputText','Qlist_" + ii + "__OptionList_" + i + "__InputText1' ,'" + Model.Qlist[ii].OptionList[i].Value + "','" + Model.Qlist[ii].OptionList[i].SelectedItem + "',this)",
                     })
                                 @*if (item.OptionList[i].ControlInputType != null)
-                                    {
-                                        if (item.OptionList[i].ControlInputType.ToLower() == "textbox")
-                                        {
-                                            var cln = !string.IsNullOrWhiteSpace(Model.Qlist[ii].OptionList[i].LabelName1) ? Model.Qlist[ii].OptionList[i].LabelName1.Replace(" ", "_") : "";
-                                            <div class="@cl" style="@inputval">
-                                                @Html.DisplayFor(m => m.Qlist[ii].OptionList[i].LabelName1, new { htmlAttributes = new { @class = "", @Style = "" } })
-                                                @Html.EditorFor(m => m.Qlist[ii].OptionList[i].InputText, new
-                                           {
-                                               htmlAttributes = new
-                                               {
-                                                   @data_qcode = Model.Qlist[ii].QuestionCode,
-                                                   @class = "form-control txt " + cln + i + " " + Model.Qlist[ii].OptionList[i].InputText + " " + Model.Qlist[ii].OptionList[i].QuestionCode + i + " txt" + Model.Qlist[ii].ParentQuestionCode + " " + Model.Qlist[ii].DependedAnswer,
-                                                   Style = "" + inputval + "",
-                                                   @maxlength = Model.Qlist[ii].OptionList[i].Limit,
-                                                   //@required = @Model.Qlist[ii].OptionTypeValidation,
-                                                   @type = Model.Qlist[ii].OptionList[i].OptionTypeValidation,
-                                                   @onchange = "OnChangInputLimit('" + item.Question + "','" + Model.Qlist[ii].OptionList[i].Limit + "',this)"
-                                               }
-                                           })
-                                            </div>
-                                        }
-                                    }*@
+                {
+                    if (item.OptionList[i].ControlInputType.ToLower() == "textbox")
+                    {
+                        var cln = !string.IsNullOrWhiteSpace(Model.Qlist[ii].OptionList[i].LabelName1) ? Model.Qlist[ii].OptionList[i].LabelName1.Replace(" ", "_") : "";
+                        <div class="@cl" style="@inputval">
+                            @Html.DisplayFor(m => m.Qlist[ii].OptionList[i].LabelName1, new { htmlAttributes = new { @class = "", @Style = "" } })
+                            @Html.EditorFor(m => m.Qlist[ii].OptionList[i].InputText, new
+                       {
+                           htmlAttributes = new
+                           {
+                               @data_qcode = Model.Qlist[ii].QuestionCode,
+                               @class = "form-control txt " + cln + i + " " + Model.Qlist[ii].OptionList[i].InputText + " " + Model.Qlist[ii].OptionList[i].QuestionCode + i + " txt" + Model.Qlist[ii].ParentQuestionCode + " " + Model.Qlist[ii].DependedAnswer,
+                               Style = "" + inputval + "",
+                               @maxlength = Model.Qlist[ii].OptionList[i].Limit,
+                               //@required = @Model.Qlist[ii].OptionTypeValidation,
+                               @type = Model.Qlist[ii].OptionList[i].OptionTypeValidation,
+                               @onchange = "OnChangInputLimit('" + item.Question + "','" + Model.Qlist[ii].OptionList[i].Limit + "',this)"
+                           }
+                       })
+                        </div>
+                    }
+                }*@
                                 if (item.OptionList[i].ControlInputType1 != null)
                                 {
                                     if (item.OptionList[i].ControlInputType1.ToLower() == "textbox")
@@ -103,7 +103,7 @@
                                         <div class="@cl1" style="@inputval1">
                                             @Html.DisplayFor(m => m.Qlist[ii].OptionList[i].LabelName2, new { @class = "", @Style = "" })
                                             @Html.TextAreaFor(m => m.Qlist[ii].OptionList[i].InputText1, new
-                                       { 
+                                       {
                                            htmlAttributes = new
                                            {
                                                @data_qcode = Model.Qlist[ii].QuestionCode,
@@ -181,6 +181,36 @@
                                    @class = "form-control txt " + Model.Qlist[ii].ParentQuestionCode + " " + Model.Qlist[ii].OptionList[i].QuestionCode,
                                    Style = "display:block"
                                }
+                           })
+                            }
+                        }
+                        @if (item.ControlType.ToLower() == "textarea")
+                        {
+                            for (int i = 0; i < item.OptionList.Count; i++)
+                            {
+                                var sel = Model.Qlist[ii].QuestionCode + Model.Qlist[ii].OptionList[i].Value;
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].FormId_fk)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].QuestionCode)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].QuestionId_fk)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].OptionId_Pk)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Id)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].ControlInputType)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Limit)
+
+                                @Html.TextAreaFor(m => m.Qlist[ii].OptionList[i].InputText, new
+                           {
+                              
+                                   rows = "4", cols="500",
+                                   @data_QIndex = ii,
+                                   @data_OptIndex = i,
+                                   @data_qcode = Model.Qlist[ii].QuestionCode,
+                                   @data_depans = Model.Qlist[ii].DependedAnswer,
+                                   //@required = @Model.Qlist[ii].OptionTypeValidation,
+                                   @maxlength = Model.Qlist[ii].OptionList[i].Limit,
+                                   @type = Model.Qlist[ii].OptionList[i].OptionInputType,
+                                   @class = "form-control txt " + Model.Qlist[ii].ParentQuestionCode + " " + Model.Qlist[ii].OptionList[i].QuestionCode,
+                                   Style = "display:block"
+                               
                            })
                             }
                         }

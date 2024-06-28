@@ -74,5 +74,29 @@ namespace Leadership.Models
             return ds;
         }
         #endregion
+
+        #region Start 28 June 2024  SLLT Survey Controller 
+        public static DataSet GetSPScoreMarkAnswerSLLT(string User)
+        {
+            StoredProcedure sp = new StoredProcedure("SP_ScoreMarkAnswer_SLLT");
+            sp.Command.AddParameter("@User", User, DbType.String);
+            DataSet ds = sp.ExecuteDataSet();
+            return ds;
+        }
+        public static DataSet GetQuestionSummaryMarksSLLT(string User)
+        {
+            StoredProcedure sp = new StoredProcedure("SP_QuestionSummaryMarks_SLLT");
+            sp.Command.AddParameter("@User", User, DbType.String);
+            DataSet ds = sp.ExecuteDataSet();
+            return ds;
+        }
+        public static DataSet GetSP_ScorersSummaryMarksSLLT(string User)
+        {
+            StoredProcedure sp = new StoredProcedure("SP_ScorersSummary_SLLT");
+            sp.Command.AddParameter("@User", User, DbType.String);
+            DataSet ds = sp.ExecuteDataSet();
+            return ds;
+        }
+        #endregion
     }
 }

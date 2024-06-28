@@ -1378,6 +1378,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Scripts\amazingcarousel.js" />
     <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\App\ChartSummarySLLT.js" />
     <Content Include="Scripts\App\ChartSummary1.js" />
     <Content Include="Scripts\App\ChartSummary.js" />
     <Content Include="Scripts\App\DashBoard-Chart.js" />

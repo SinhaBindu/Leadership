@@ -187,7 +187,7 @@ namespace Leadership.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Add", "Competency");
+                    return RedirectToAction("Add", "SLLTAssessments");
                 }else
                 {
                     if (model.Email == "admin@gmail.com")
@@ -203,6 +203,10 @@ namespace Leadership.Controllers
                     {
                         case SignInStatus.Success:
                             //return RedirectToLocal(returnUrl);
+                            if (CommonModel.IsRoleLogin()!="all")
+                            {
+                                return RedirectToAction("Index", "SLLTAssessments");
+                            }
                             return RedirectToAction("Summary", "Competency");
                         case SignInStatus.LockedOut:
                             return View("Lockout");

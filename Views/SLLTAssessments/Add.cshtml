@@ -2,7 +2,7 @@
 @*@model  List<Leadership.Models.HRModel>*@
 @using Leadership.Models;
 @{
-    ViewBag.Title = "Questions: Competency";
+    ViewBag.Title = "Questions: SLLTAssessments";
     // ViewBag.TitleIcon = "fa fa-user";
     //ViewBag.SemiTitle = "Leadership Pizza Self-Assessment";
     // ViewBag.SemiTitleLink = "~/";
@@ -30,166 +30,28 @@
                         <div class="col-md-12 q-title"><strong>@item.SectionType</strong></div>
                     }
 
-                <span class="control-label col-md-4">
-                    @(item.QuestionCode+". " +item.Question) <em>*</em>
-                </span>
-                <div class="col-md-6 q-check-input">
-                    @Html.HiddenFor(m => m.Qlist[ii].FormId)
-                    @Html.HiddenFor(m => m.Qlist[ii].QuestionCode)
-                    @Html.HiddenFor(m => m.Qlist[ii].QuestionId_pk)
-                    @Html.HiddenFor(m => m.Qlist[ii].ControlType)
-                    @Html.HiddenFor(m => m.Qlist[ii].ControlInputType)
-                    @Html.HiddenFor(m => m.Qlist[ii].SectionType)
+                    <span class="control-label col-md-4">
+                        @(item.QuestionCode + ". " + item.Question) <em>*</em>
+                    </span>
+                    <div class="col-md-6 q-check-input">
+                        @Html.HiddenFor(m => m.Qlist[ii].FormId)
+                        @Html.HiddenFor(m => m.Qlist[ii].QuestionCode)
+                        @Html.HiddenFor(m => m.Qlist[ii].QuestionId_pk)
+                        @Html.HiddenFor(m => m.Qlist[ii].ControlType)
+                        @Html.HiddenFor(m => m.Qlist[ii].ControlInputType)
+                        @Html.HiddenFor(m => m.Qlist[ii].SectionType)
 
 
-                    @*@Html.TextBoxFor(m => m.Qlist[ii].QuestionCode)*@
-                    @if (item.ControlType.ToLower() == "checkbox")
-                    {
-                        for (int i = 0; i < item.OptionList.Count; i++)
+                        @*@Html.TextBoxFor(m => m.Qlist[ii].QuestionCode)*@
+                        @if (item.ControlType.ToLower() == "checkbox")
                         {
-                            var sel = Model.Qlist[ii].QuestionCode + Model.Qlist[ii].OptionList[i].Value;
-                            var cl = "Qlist_" + ii + "__OptionList_" + i + "__InputText";
-                            var cl1 = "Qlist_" + ii + "__OptionList_" + i + "__InputText1";
-                            var inputval = string.IsNullOrWhiteSpace(Model.Qlist[ii].OptionList[i].InputText) ? "display:none" : "display:block";
-                            var inputval1 = string.IsNullOrWhiteSpace(Model.Qlist[ii].OptionList[i].InputText1) ? "display:none" : "display:block";
-                            @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].FormId_fk)
-                            @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].QuestionCode)
-                            @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].QuestionId_fk)
-                            @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].OptionId_Pk)
-                            @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Id)
-                            @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].ControlInputType)
-                            @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Limit)
-
-                            @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Value)
-                            @Html.DisplayFor(m => m.Qlist[ii].OptionList[i].Text)
-                            @Html.CheckBoxFor(m => m.Qlist[ii].OptionList[i].SelectedItem,
-                new
-                {
-                    Style = "vertical-align:3px",
-                    @data_QIndex = ii,
-                    @data_OptIndex = i,
-                    @data_QuestCode = Model.Qlist[ii].QuestionCode,
-                    //@required = @Model.Qlist[ii].OptionTypeValidation,
-                    @class = Model.Qlist[ii].ParentQuestionCode + " " + "QuestCode" + Model.Qlist[ii].QuestionCode,
-                    @onchange = "OnChgTargetcontrol('Qlist_" + ii + "__OptionList_" + i + "__InputText','Qlist_" + ii + "__OptionList_" + i + "__InputText1' ,'" + Model.Qlist[ii].OptionList[i].Value + "','" + Model.Qlist[ii].OptionList[i].SelectedItem + "',this)",
-                })
-                            @*if (item.OptionList[i].ControlInputType != null)
-                {
-                    if (item.OptionList[i].ControlInputType.ToLower() == "textbox")
-                    {
-                        var cln = !string.IsNullOrWhiteSpace(Model.Qlist[ii].OptionList[i].LabelName1) ? Model.Qlist[ii].OptionList[i].LabelName1.Replace(" ", "_") : "";
-                        <div class="@cl" style="@inputval">
-                            @Html.DisplayFor(m => m.Qlist[ii].OptionList[i].LabelName1, new { htmlAttributes = new { @class = "", @Style = "" } })
-                            @Html.EditorFor(m => m.Qlist[ii].OptionList[i].InputText, new
-                       {
-                           htmlAttributes = new
-                           {
-                               @data_qcode = Model.Qlist[ii].QuestionCode,
-                               @class = "form-control txt " + cln + i + " " + Model.Qlist[ii].OptionList[i].InputText + " " + Model.Qlist[ii].OptionList[i].QuestionCode + i + " txt" + Model.Qlist[ii].ParentQuestionCode + " " + Model.Qlist[ii].DependedAnswer,
-                               Style = "" + inputval + "",
-                               @maxlength = Model.Qlist[ii].OptionList[i].Limit,
-                               //@required = @Model.Qlist[ii].OptionTypeValidation,
-                               @type = Model.Qlist[ii].OptionList[i].OptionTypeValidation,
-                               @onchange = "OnChangInputLimit('" + item.Question + "','" + Model.Qlist[ii].OptionList[i].Limit + "',this)"
-                           }
-                       })
-                        </div>
-                    }
-                }*@
-                            if (item.OptionList[i].ControlInputType1 != null)
+                            for (int i = 0; i < item.OptionList.Count; i++)
                             {
-                                if (item.OptionList[i].ControlInputType1.ToLower() == "textbox")
-                                {
-                                    <div class="@cl1" style="@inputval1">
-                                        @Html.DisplayFor(m => m.Qlist[ii].OptionList[i].LabelName2, new { @class = "", @Style = "" })
-                                        @Html.EditorFor(m => m.Qlist[ii].OptionList[i].InputText1, new
-                                         {
-                                            htmlAttributes = new
-                                            {
-                                                @data_qcode = Model.Qlist[ii].QuestionCode,
-                                                @class = "form-control txt " + Model.Qlist[ii].OptionList[i].InputText1 + " " + Model.Qlist[ii].OptionList[i].QuestionCode + i + " txt" + Model.Qlist[ii].ParentQuestionCode,
-                                                Style = "" + inputval + "",
-                                                @maxlength = Model.Qlist[ii].OptionList[i].Limit,
-                                                //@required = @Model.Qlist[ii].OptionTypeValidation,
-                                                @type = Model.Qlist[ii].OptionList[i].OptionTypeValidation,
-                                                @onchange = "OnChangInputLimit('" + item.Question + "','" + Model.Qlist[ii].OptionList[i].Limit + "',this)"
-                                            }
-                                       })
-                                    </div>
-                                }
-                            }
-                        }
-                    }
-                    @if (item.ControlType.ToLower() == "radiobutton")
-                    {
-                        for (int i = 0; i < item.OptionList.Count; i++)
-                        {
-
-                            var sel = Model.Qlist[ii].QuestionCode + Model.Qlist[ii].OptionList[i].Value;
-                            @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].FormId_fk)
-                            @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].QuestionCode)
-                            @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].QuestionId_fk)
-                            @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].OptionId_Pk)
-                            @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Id)
-                            @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].ControlInputType)
-                            @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Limit)
-                            @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Value)
-
-                <div style="float: left; width: 100%;">
-                    @Html.RadioButtonFor(m => m.Qlist[ii].Answer, Model.Qlist[ii].OptionList[i].Value,
-                     new
-                     {
-                         @data_isselected = Model.Qlist[ii].OptionList[i].SelectedItem ? "true" : "false",
-                         @data_QIndex = ii,
-                         @data_OptIndex = i,
-                         @data_qcode = Model.Qlist[ii].QuestionCode,
-                         @data_depans = Model.Qlist[ii].DependedAnswer,
-                         @data_parentqcode = Model.Qlist[ii].ParentQuestionCode,
-                         @class = Model.Qlist[ii].ParentQuestionCode + " " + "QuestCode" + Model.Qlist[ii].QuestionCode,
-                         @id = Model.Qlist[ii].OptionList[i].OptionCode,
-                         @required = @Model.Qlist[ii].OptionTypeValidation,
-
-                         onchange = "OnChangeRadio('" + @item.QuestionCode + "', '" + @item.OptionList[i].Value + "','" + Model.Qlist[ii].DependedAnswer + "', this)",
-                     })
-                    <label for="@(item.OptionList[i].Text.ToLower()+")&nbsp; "+item.OptionList[i].LabelName1.ToLower())" class="q-lable" style=" display: contents;">@item.OptionList[i].Text)&nbsp; @item.OptionList[i].LabelName1</label>
-                </div>
-                        }
-                    }
-                    @if (item.ControlType.ToLower() == "textbox")
-                    {
-                        for (int i = 0; i < item.OptionList.Count; i++)
-                        {
-                            var sel = Model.Qlist[ii].QuestionCode + Model.Qlist[ii].OptionList[i].Value;
-                            @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].FormId_fk)
-                            @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].QuestionCode)
-                            @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].QuestionId_fk)
-                            @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].OptionId_Pk)
-                            @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Id)
-                            @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].ControlInputType)
-                            @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Limit)
-
-                            @Html.EditorFor(m => m.Qlist[ii].OptionList[i].InputText, new
-                       {
-                           htmlAttributes = new
-                           {
-                               @data_QIndex = ii,
-                               @data_OptIndex = i,
-                               @data_qcode = Model.Qlist[ii].QuestionCode,
-                               @data_depans = Model.Qlist[ii].DependedAnswer,
-                               //@required = @Model.Qlist[ii].OptionTypeValidation,
-                               @type = Model.Qlist[ii].OptionList[i].OptionTypeValidation,
-                               @class = "form-control txt " + Model.Qlist[ii].ParentQuestionCode + " " + Model.Qlist[ii].OptionList[i].QuestionCode,
-                               Style = "display:block"
-                           }
-                       })
-                        }
-                    }
-                    @if (item.ControlType.ToLower() == "radio")
-                    {
-                        <div id="ratingDiv" class="smallText" data-value="@(item.QuestionId_pk)">
-                            @for (int i = 0; i < item.OptionList.Count; i++)
-                            {
-                                var opcode = item.OptionList[i].Value;
+                                var sel = Model.Qlist[ii].QuestionCode + Model.Qlist[ii].OptionList[i].Value;
+                                var cl = "Qlist_" + ii + "__OptionList_" + i + "__InputText";
+                                var cl1 = "Qlist_" + ii + "__OptionList_" + i + "__InputText1";
+                                var inputval = string.IsNullOrWhiteSpace(Model.Qlist[ii].OptionList[i].InputText) ? "display:none" : "display:block";
+                                var inputval1 = string.IsNullOrWhiteSpace(Model.Qlist[ii].OptionList[i].InputText1) ? "display:none" : "display:block";
                                 @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].FormId_fk)
                                 @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].QuestionCode)
                                 @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].QuestionId_fk)
@@ -198,30 +60,168 @@
                                 @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].ControlInputType)
                                 @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Limit)
 
-                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].OptionCode)
-                                if (item.OptionList[i].OptionCode == Enums.EnumRatingGB.Poor.ToString())
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Value)
+                                @Html.DisplayFor(m => m.Qlist[ii].OptionList[i].Text)
+                                @Html.CheckBoxFor(m => m.Qlist[ii].OptionList[i].SelectedItem,
+                    new
+                    {
+                        Style = "vertical-align:3px",
+                        @data_QIndex = ii,
+                        @data_OptIndex = i,
+                        @data_QuestCode = Model.Qlist[ii].QuestionCode,
+                        //@required = @Model.Qlist[ii].OptionTypeValidation,
+                        @class = Model.Qlist[ii].ParentQuestionCode + " " + "QuestCode" + Model.Qlist[ii].QuestionCode,
+                        @onchange = "OnChgTargetcontrol('Qlist_" + ii + "__OptionList_" + i + "__InputText','Qlist_" + ii + "__OptionList_" + i + "__InputText1' ,'" + Model.Qlist[ii].OptionList[i].Value + "','" + Model.Qlist[ii].OptionList[i].SelectedItem + "',this)",
+                    })
+                                @*if (item.OptionList[i].ControlInputType != null)
+                                    {
+                                        if (item.OptionList[i].ControlInputType.ToLower() == "textbox")
+                                        {
+                                            var cln = !string.IsNullOrWhiteSpace(Model.Qlist[ii].OptionList[i].LabelName1) ? Model.Qlist[ii].OptionList[i].LabelName1.Replace(" ", "_") : "";
+                                            <div class="@cl" style="@inputval">
+                                                @Html.DisplayFor(m => m.Qlist[ii].OptionList[i].LabelName1, new { htmlAttributes = new { @class = "", @Style = "" } })
+                                                @Html.EditorFor(m => m.Qlist[ii].OptionList[i].InputText, new
+                                           {
+                                               htmlAttributes = new
+                                               {
+                                                   @data_qcode = Model.Qlist[ii].QuestionCode,
+                                                   @class = "form-control txt " + cln + i + " " + Model.Qlist[ii].OptionList[i].InputText + " " + Model.Qlist[ii].OptionList[i].QuestionCode + i + " txt" + Model.Qlist[ii].ParentQuestionCode + " " + Model.Qlist[ii].DependedAnswer,
+                                                   Style = "" + inputval + "",
+                                                   @maxlength = Model.Qlist[ii].OptionList[i].Limit,
+                                                   //@required = @Model.Qlist[ii].OptionTypeValidation,
+                                                   @type = Model.Qlist[ii].OptionList[i].OptionTypeValidation,
+                                                   @onchange = "OnChangInputLimit('" + item.Question + "','" + Model.Qlist[ii].OptionList[i].Limit + "',this)"
+                                               }
+                                           })
+                                            </div>
+                                        }
+                                    }*@
+                                if (item.OptionList[i].ControlInputType1 != null)
                                 {
-                                    <span>Poor</span>
-                                }
-                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].AnswerValue, new { @class = "qidoptid" + item.QuestionId_pk + opcode + "" })
-                                <input type="hidden" name="hdfd" id="hdfd" value="" />
-                                @*<input type="hidden" name="Qlist[@item.QuestionId_pk].OptionList[@opcode].AnswerValue" id="Qlist[@item.QuestionId_pk].OptionList[@opcode].AnswerValue" value="0" />*@
-                                <label class="star empty q-lable">
-                                    <input type="radio" name="Qlist[@ii].Answer" id="Qlist_@(item.QuestionId_pk)OptionList_@opcode" value="@opcode" required class="rstar" data-value="@item.QuestionId_pk"><i class="fa fa-star"></i>
-                                </label>
-
-
-                                @*question@(item.QuestionId_pk)  Qlist[@ii].Answer<img src="~/Content/images/whitestar.jpg" alt="" class="ratingStar" data-value="@item.OptionList[i].OptionCode" style="width:50px;height:30px;" />*@
-                                if (item.OptionList[i].OptionCode == Enums.EnumRatingGB.Excellent.ToString())
-                                {
-                                    <span>Excellent</span>
+                                    if (item.OptionList[i].ControlInputType1.ToLower() == "textbox")
+                                    {
+                                        <div class="@cl1" style="@inputval1">
+                                            @Html.DisplayFor(m => m.Qlist[ii].OptionList[i].LabelName2, new { @class = "", @Style = "" })
+                                            @Html.TextAreaFor(m => m.Qlist[ii].OptionList[i].InputText1, new
+                                       { 
+                                           htmlAttributes = new
+                                           {
+                                               @data_qcode = Model.Qlist[ii].QuestionCode,
+                                               @class = "form-control txt " + Model.Qlist[ii].OptionList[i].InputText1 + " " + Model.Qlist[ii].OptionList[i].QuestionCode + i + " txt" + Model.Qlist[ii].ParentQuestionCode,
+                                               Style = "" + inputval + "",
+                                               @maxlength = Model.Qlist[ii].OptionList[i].Limit,
+                                                   // @required = @Model.Qlist[ii].OptionTypeValidation,
+                                                    @type = Model.Qlist[ii].OptionList[i].OptionInputType,
+                                               @onchange = "OnChangInputLimit('" + item.Question + "','" + Model.Qlist[ii].OptionList[i].Limit + "',this)"
+                                           }
+                                       })
+                                        </div>
+                                    }
                                 }
                             }
-                            <div id="errors@(ii)" class="text-danger errors@(item.QuestionId_pk)"></div>
-                            @Html.ValidationMessageFor(m => m.Qlist[ii].Answer, "", new { })
-                        </div>
-                    }
-                </div>
+                        }
+                        @if (item.ControlType.ToLower() == "radiobutton")
+                        {
+                            for (int i = 0; i < item.OptionList.Count; i++)
+                            {
+                                var sel = Model.Qlist[ii].QuestionCode + Model.Qlist[ii].OptionList[i].Value;
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].FormId_fk)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].QuestionCode)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].QuestionId_fk)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].OptionId_Pk)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Id)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].ControlInputType)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Limit)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Value)
+
+                                <div style="float: left; width: 100%;">
+                                    @Html.RadioButtonFor(m => m.Qlist[ii].Answer, Model.Qlist[ii].OptionList[i].Value,
+                                     new
+                                     {
+                                         @data_isselected = Model.Qlist[ii].OptionList[i].SelectedItem ? "true" : "false",
+                                         @data_QIndex = ii,
+                                         @data_OptIndex = i,
+                                         @data_qcode = Model.Qlist[ii].QuestionCode,
+                                         @data_depans = Model.Qlist[ii].DependedAnswer,
+                                         @data_parentqcode = Model.Qlist[ii].ParentQuestionCode,
+                                         @class = Model.Qlist[ii].ParentQuestionCode + " " + "QuestCode" + Model.Qlist[ii].QuestionCode,
+                                         @id = Model.Qlist[ii].OptionList[i].OptionCode,
+                                         @required = @Model.Qlist[ii].OptionTypeValidation,
+
+                                         onchange = "OnChangeRadio('" + @item.QuestionCode + "', '" + @item.OptionList[i].Value + "','" + Model.Qlist[ii].DependedAnswer + "', this)",
+                                     })
+                                    <label for="@(item.OptionList[i].Text.ToLower()+")&nbsp; "+item.OptionList[i].LabelName1.ToLower())" class="q-lable" style=" display: contents;">@item.OptionList[i].Text)&nbsp; @item.OptionList[i].LabelName1</label>
+                                </div>
+                            }
+                        }
+                        @if (item.ControlType.ToLower() == "textbox")
+                        {
+                            for (int i = 0; i < item.OptionList.Count; i++)
+                            {
+                                var sel = Model.Qlist[ii].QuestionCode + Model.Qlist[ii].OptionList[i].Value;
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].FormId_fk)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].QuestionCode)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].QuestionId_fk)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].OptionId_Pk)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Id)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].ControlInputType)
+                                @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Limit)
+
+                                @Html.EditorFor(m => m.Qlist[ii].OptionList[i].InputText, new
+                           {
+                               htmlAttributes = new
+                               {
+                                   @data_QIndex = ii,
+                                   @data_OptIndex = i,
+                                   @data_qcode = Model.Qlist[ii].QuestionCode,
+                                   @data_depans = Model.Qlist[ii].DependedAnswer,
+                                   //@required = @Model.Qlist[ii].OptionTypeValidation,
+                                   @maxlength = Model.Qlist[ii].OptionList[i].Limit,
+                                   @type = Model.Qlist[ii].OptionList[i].OptionInputType,
+                                   @class = "form-control txt " + Model.Qlist[ii].ParentQuestionCode + " " + Model.Qlist[ii].OptionList[i].QuestionCode,
+                                   Style = "display:block"
+                               }
+                           })
+                            }
+                        }
+                        @if (item.ControlType.ToLower() == "radio")
+                        {
+                            <div id="ratingDiv" class="smallText" data-value="@(item.QuestionId_pk)">
+                                @for (int i = 0; i < item.OptionList.Count; i++)
+                                {
+                                    var opcode = item.OptionList[i].Value;
+                                    @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].FormId_fk)
+                                    @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].QuestionCode)
+                                    @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].QuestionId_fk)
+                                    @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].OptionId_Pk)
+                                    @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Id)
+                                    @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].ControlInputType)
+                                    @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].Limit)
+
+                                    @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].OptionCode)
+                                    if (item.OptionList[i].OptionCode == Enums.EnumRatingGB.Poor.ToString())
+                                    {
+                                        <span>Poor</span>
+                                    }
+                                    @Html.HiddenFor(m => m.Qlist[ii].OptionList[i].AnswerValue, new { @class = "qidoptid" + item.QuestionId_pk + opcode + "" })
+                                    <input type="hidden" name="hdfd" id="hdfd" value="" />
+                                    @*<input type="hidden" name="Qlist[@item.QuestionId_pk].OptionList[@opcode].AnswerValue" id="Qlist[@item.QuestionId_pk].OptionList[@opcode].AnswerValue" value="0" />*@
+                                    <label class="star empty q-lable">
+                                        <input type="radio" name="Qlist[@ii].Answer" id="Qlist_@(item.QuestionId_pk)OptionList_@opcode" value="@opcode" required class="rstar" data-value="@item.QuestionId_pk"><i class="fa fa-star"></i>
+                                    </label>
+
+
+                                    @*question@(item.QuestionId_pk)  Qlist[@ii].Answer<img src="~/Content/images/whitestar.jpg" alt="" class="ratingStar" data-value="@item.OptionList[i].OptionCode" style="width:50px;height:30px;" />*@
+                                    if (item.OptionList[i].OptionCode == Enums.EnumRatingGB.Excellent.ToString())
+                                    {
+                                        <span>Excellent</span>
+                                    }
+                                }
+                                <div id="errors@(ii)" class="text-danger errors@(item.QuestionId_pk)"></div>
+                                @Html.ValidationMessageFor(m => m.Qlist[ii].Answer, "", new { })
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
             pvsection = (item.SectionType.Trim());
@@ -239,7 +239,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel">
-                    @using (Html.BeginForm("Add", "Competency", FormMethod.Post, new { @class = "panel-body form-horizontal form-padding loader", enctype = "multipart/form-data", @id = "FormSubmit" }))
+                    @using (Html.BeginForm("Add", "SLLTAssessments", FormMethod.Post, new { @class = "panel-body form-horizontal form-padding loader", enctype = "multipart/form-data", @id = "FormSubmit" }))
                     {
                         <div class="col-md-12">
                             @Html.Partial("_Alerts")
@@ -263,7 +263,7 @@
                                 <div class="col-md-3 pull-right">
                                     <span class="">
                                         <button type="submit" class="previous btn btn-primary btn-lg" id="btnsubmit">Submit</button>
-                                        <a href="~/Competency/Add" class="btn btn-dark btn-lg">Reset</a>
+                                        <a href="~/SLLTAssessments/Add" class="btn btn-dark btn-lg">Reset</a>
                                     </span>
 
                                 </div>
@@ -338,7 +338,7 @@
                         var Qcount1 = 0; var Qoptcount1 = 0;
                         var mlist = '@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.Qlist))';
                         mlist = JSON.parse(mlist.replace(/[\u0000-\u0019]+/g, ""));
-                      
+
                         for (var i = 0; i < mlist.length; i++) {
                             Qoptcount1 = 0;
                             var objm = mlist[i].QuestionId_pk;
@@ -356,6 +356,10 @@
                                     //$('#errors' + objm).css('color', 'red');
                                 }
                             }
+                            if (radioObj.length == 0) {
+                                Qcount1++;
+                            }
+
                         }
                         debugger;
                         if (Qcount1 == mlist.length) {
@@ -376,7 +380,7 @@
                         //valdata.append(Draft: true);
                         //var PostData = JSON.stringify({ model: valdata, IS_Draft:1 });
                         $.ajax({
-                            url: "/Competency/Add",
+                            url: "/SLLTAssessments/Add",
                             type: "POST",
                             dataType: 'json',
                             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -384,7 +388,7 @@
                             success: function (resp) {
                                 if (resp.IsSuccess) {
                                     toastr.success('Success', resp.msg);
-                                    var urlpath = "/Competency/Index";
+                                    var urlpath = "/SLLTAssessments/Index";
                                     location.href = urlpath;
                                     var html = $(resp.htmlData);
                                     var hiddenList = $('input[type="hidden"]', html);
@@ -532,7 +536,7 @@
         }
 
         function OnChangeRadio(QuestionCode, SelVal, DepandAns, Ele) {
-            debugger;
+           // debugger;
             // var clname = $('.' + QuestionCode).attr('class');
             var clname = $('.' + QuestionCode).attr('class') == undefined ? null : $('.' + QuestionCode).attr('class');
             //if (clname) {

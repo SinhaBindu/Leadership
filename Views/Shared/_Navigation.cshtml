@@ -48,6 +48,8 @@
                                 @*@Html.ActionLinkMenu("<i class='fa fa-home'></i> <span class=\"menu-title\">Dashboard</span>", "Summary", "Survey")*@
                                 @Html.ActionLinkMenu("<i class='fa fa-home'></i> <span class=\"menu-title\">Dashboard</span>", "Summary", "Competency")
                                 @Html.ActionLinkMenu("<i class='fa fa-tasks'></i> <span class=\"menu-title\">Scorer Summary</span>", "ScorerSummary", "Competency")
+                                @Html.ActionLinkMenu("<i class='fa fa-home'></i> <span class=\"menu-title\">SLTT Dashboard</span>", "Summary", "SLLTAssessments")
+                                @Html.ActionLinkMenu("<i class='fa fa-tasks'></i> <span class=\"menu-title\">SLTT Scorer Summary</span>", "ScorerSummary", "SLLTAssessments")
 
                             }
 
@@ -62,183 +64,185 @@
                                 <ul class="collapse treeview-menu">
                                     @*<li>@Html.ActionLinkMenu("<i class='fa fa-plus'></i> <span>Ona Infra</span>", "OnaInfra", "Infra")</li>*@
                                     @*<li>@Html.ActionLinkMenu("<i class='fa fa-plus'></i> <span>Survey</span>", "Add", "Survey")</li>
-                                        <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>Result</span>", "Index", "Survey")</li>*@
+                    <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>Result</span>", "Index", "Survey")</li>*@
                                     <li>@Html.ActionLinkMenu("<i class='fa fa-plus'></i> <span>Survey</span>", "Add", "Competency")</li>
                                     <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>Result</span>", "Index", "Competency")</li>
+                                    <li>@Html.ActionLinkMenu("<i class='fa fa-plus'></i> <span>SLTT Survey</span>", "Add", "SLLTAssessments")</li>
+                                    <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>Result</span>", "Index", "SLLTAssessments")</li>
                                     @*@if (Leadership.Models.CommonModel.IsRoleLogin() == "all")
-                                        {
-                                            <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>Summary</span>", "Summary", "Survey")</li>
-                                        }*@
+                    {
+                        <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>Summary</span>", "Summary", "Survey")</li>
+                    }*@
                                 </ul>
                             </li>
                             <hr style="border-bottom:1px solid #808080; font-size: medium; margin-top: 0px !important; margin-bottom: 0px !important;" />
 
                             @*<li class="treeview">
-                                    <a href="#">
-                                        <i class="fa fa-female"></i>
-                                        <span class="menu-title">Child Entitlements</span>
-                                        <i class="arrow"></i>
-                                    </a>
-                                    <ul class="collapse treeview-menu">
-                                        <li>@Html.ActionLinkMenu("<i class='fa fa-plus'></i> <span>Monthly</span>", "Add", "CHILD", new { Parameter = 1 })</li>
-                                        <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>Monthly List</span>", "Index", "CHILD", new { Parameter = 1 })</li>
-                                        <li>@Html.ActionLinkMenu("<i class='fa fa-plus'></i> <span>Yearly</span>", "Add", "CHILD", new { Parameter = 2 })</li>
-                                        <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>Yearly List</span>", "Index", "CHILD", new { Parameter = 2 })</li>
-                                    </ul>
-                                </li>*@
+                <a href="#">
+                    <i class="fa fa-female"></i>
+                    <span class="menu-title">Child Entitlements</span>
+                    <i class="arrow"></i>
+                </a>
+                <ul class="collapse treeview-menu">
+                    <li>@Html.ActionLinkMenu("<i class='fa fa-plus'></i> <span>Monthly</span>", "Add", "CHILD", new { Parameter = 1 })</li>
+                    <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>Monthly List</span>", "Index", "CHILD", new { Parameter = 1 })</li>
+                    <li>@Html.ActionLinkMenu("<i class='fa fa-plus'></i> <span>Yearly</span>", "Add", "CHILD", new { Parameter = 2 })</li>
+                    <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>Yearly List</span>", "Index", "CHILD", new { Parameter = 2 })</li>
+                </ul>
+            </li>*@
                             @*<hr style="border-bottom:1px solid #808080; font-size: medium; margin-top: 0px !important; margin-bottom: 0px !important;" />*@
 
                             @*<li class="treeview">
-                                    <a href="#">
-                                        <i class="fa fa-address-book"></i>
-                                        <span class="menu-title">HR</span>
-                                        <i class="arrow"></i>
-                                    </a>
-                                    <ul class="collapse treeview-menu">
-                                        <li>@Html.ActionLinkMenu("<i class='fa fa-plus'></i> <span>Add</span>", "Add", "HR")</li>
-                                        <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>List</span>", "Index", "HR")</li>
-                                    </ul>
-                                </li>
-                                  <hr style="border-bottom:1px solid #808080; font-size: medium; margin-top: 0px !important; margin-bottom: 0px !important;" />
+                <a href="#">
+                    <i class="fa fa-address-book"></i>
+                    <span class="menu-title">HR</span>
+                    <i class="arrow"></i>
+                </a>
+                <ul class="collapse treeview-menu">
+                    <li>@Html.ActionLinkMenu("<i class='fa fa-plus'></i> <span>Add</span>", "Add", "HR")</li>
+                    <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>List</span>", "Index", "HR")</li>
+                </ul>
+            </li>
+              <hr style="border-bottom:1px solid #808080; font-size: medium; margin-top: 0px !important; margin-bottom: 0px !important;" />
 
-                                <li class="treeview">
-                                    <a href="#">
-                                        <i class="fa fa-graduation-cap"></i>
-                                        <span class="menu-title">Academics</span>
-                                        <i class="arrow"></i>
-                                    </a>
-                                    <ul class="collapse treeview-menu">
-                                        <li>@Html.ActionLinkMenu("<i class='fa fa-plus'></i> <span>Add</span>", "Add", "Academic")</li>
-                                        <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>List</span>", "Index", "Academic")</li>
-                                    </ul>
-                                </li>
-                                  <hr style="border-bottom:1px solid #808080; font-size: medium; margin-top: 0px !important; margin-bottom: 0px !important;" />
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-graduation-cap"></i>
+                    <span class="menu-title">Academics</span>
+                    <i class="arrow"></i>
+                </a>
+                <ul class="collapse treeview-menu">
+                    <li>@Html.ActionLinkMenu("<i class='fa fa-plus'></i> <span>Add</span>", "Add", "Academic")</li>
+                    <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>List</span>", "Index", "Academic")</li>
+                </ul>
+            </li>
+              <hr style="border-bottom:1px solid #808080; font-size: medium; margin-top: 0px !important; margin-bottom: 0px !important;" />
 
-                                <li class="treeview">
-                                    <a href="#">
-                                        <i class="fa fa-address-card"></i>
-                                        <span class="menu-title">Management</span>
-                                        <i class="arrow"></i>
-                                    </a>
-                                    <ul class="collapse treeview-menu">
-                                        <li>@Html.ActionLinkMenu("<i class='fa fa-plus'></i> <span>Add</span>", "Add", "Support")</li>
-                                        <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>List</span>", "Index", "Support")</li>
-                                    </ul>
-                                </li>
-                                <hr style="border-bottom: 1px solid #808080; font-size: medium; margin-top: 0px !important; margin-bottom: 0px !important;" />
-                                <li class="treeview">
-                                    <a href="#">
-                                        <i class="fa fa-check-square"></i>
-                                        <span class="menu-title">Attendance</span>
-                                        <i class="arrow"></i>
-                                    </a>
-                                    <ul class="collapse treeview-menu">
-                                            <li>@Html.ActionLinkMenu("<i class='fa fa-female'></i> <span>Enrollment List</span>", "EnrollmentList", "Attendance")</li>
-                                        <li>@Html.ActionLinkMenu("<i class='fa fa-clock-o'></i> <span>Attendance</span>", "CreateAtted", "Attendance")</li>
-                                        <li>@Html.ActionLinkMenu("<i class='fa fa-map'></i> <span>Attendance Submission</span>", "AttendanceSub", "Attendance")</li>
-                                        <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>Monthly Avg. Attendance</span>", "DailyAttendance", "Attendance")</li>
-                                    </ul>
-                                </li>
-                                  <hr style="border-bottom:1px solid #808080; font-size: medium; margin-top: 0px !important; margin-bottom: 0px !important;" />
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-address-card"></i>
+                    <span class="menu-title">Management</span>
+                    <i class="arrow"></i>
+                </a>
+                <ul class="collapse treeview-menu">
+                    <li>@Html.ActionLinkMenu("<i class='fa fa-plus'></i> <span>Add</span>", "Add", "Support")</li>
+                    <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>List</span>", "Index", "Support")</li>
+                </ul>
+            </li>
+            <hr style="border-bottom: 1px solid #808080; font-size: medium; margin-top: 0px !important; margin-bottom: 0px !important;" />
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-check-square"></i>
+                    <span class="menu-title">Attendance</span>
+                    <i class="arrow"></i>
+                </a>
+                <ul class="collapse treeview-menu">
+                        <li>@Html.ActionLinkMenu("<i class='fa fa-female'></i> <span>Enrollment List</span>", "EnrollmentList", "Attendance")</li>
+                    <li>@Html.ActionLinkMenu("<i class='fa fa-clock-o'></i> <span>Attendance</span>", "CreateAtted", "Attendance")</li>
+                    <li>@Html.ActionLinkMenu("<i class='fa fa-map'></i> <span>Attendance Submission</span>", "AttendanceSub", "Attendance")</li>
+                    <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>Monthly Avg. Attendance</span>", "DailyAttendance", "Attendance")</li>
+                </ul>
+            </li>
+              <hr style="border-bottom:1px solid #808080; font-size: medium; margin-top: 0px !important; margin-bottom: 0px !important;" />
 
-                                if ((!User.IsInRole(Leadership.Models.UserRoles.Admin)))
-                                {
-                                    <li class="treeview">
-                                    <a href="#">
-                                        <i class="fa fa-money"></i>
-                                        <span class="menu-title">Finance</span>
-                                        <i class="arrow"></i>
-                                    </a>
-                                    <ul class="collapse treeview-menu">
-                                        <li>@Html.ActionLinkMenu("<i class='fa fa-street-view'></i> <span>Fund Received</span>", "FundReceivedList", "Finance")</li>
-                                        <li>@Html.ActionLinkMenu("<i class='fa fa-street-view'></i> <span>Monthly Expenses</span>", "MonthlyExpensesList", "Finance")</li>
-                                    </ul>
-                                </li>
-                                  <hr style="border-bottom:1px solid #808080; font-size: medium; margin-top: 0px !important; margin-bottom: 0px !important;" />
+            if ((!User.IsInRole(Leadership.Models.UserRoles.Admin)))
+            {
+                <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-money"></i>
+                    <span class="menu-title">Finance</span>
+                    <i class="arrow"></i>
+                </a>
+                <ul class="collapse treeview-menu">
+                    <li>@Html.ActionLinkMenu("<i class='fa fa-street-view'></i> <span>Fund Received</span>", "FundReceivedList", "Finance")</li>
+                    <li>@Html.ActionLinkMenu("<i class='fa fa-street-view'></i> <span>Monthly Expenses</span>", "MonthlyExpensesList", "Finance")</li>
+                </ul>
+            </li>
+              <hr style="border-bottom:1px solid #808080; font-size: medium; margin-top: 0px !important; margin-bottom: 0px !important;" />
 
-                                }*@
+            }*@
 
                             <!--<li class="treeview">
-                                <a href="#">
-                                    <i class="fa fa-shield"></i>
-                                    <span class="menu-title">Safety Audit</span>
-                                    <i class="arrow"></i>
+            <a href="#">
+                <i class="fa fa-shield"></i>
+                <span class="menu-title">Safety Audit</span>
+                <i class="arrow"></i>
 
-                                </a>
-                                <ul class="collapse treeview-menu">
-                                    <li>@Html.ActionLinkMenu("<i class='fa fa-plus'></i> <span>Add</span>", "Add", "Safety")</li>
-                                    <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>List</span>", "Index", "Safety")</li>
-                                </ul>
-                            </li>
-                            <hr style="border-bottom:1px solid #808080; font-size: medium; margin-top: 0px !important; margin-bottom: 0px !important;" />
-                            <li class="treeview">
-                                <a href="#">
-                                    <i class="fa fa-bar-chart"></i>
-                                    <span class="menu-title">Analytics</span>
-                                    <i class="arrow"></i>
-                                </a>
-                                <ul class="collapse treeview-menu">
-                                    <li>@Html.ActionLinkMenu("<i class='fa fa-street-view'></i> <span>Infra</span>", "AnalyticInfra", "Analytics")</li>
-                                    <li>@Html.ActionLinkMenu("<i class='fa fa-street-view'></i> <span>Child</span>", "AnalyticChild", "Analytics")</li>
-                                    <li>@Html.ActionLinkMenu("<i class='fa fa-street-view'></i> <span>HR</span>", "AnalyticHr", "Analytics")</li>
-                                    <li>@Html.ActionLinkMenu("<i class='fa fa-street-view'></i> <span>Academic</span>", "AnalyticAcademic", "Analytics")</li>
-                                    <li>@Html.ActionLinkMenu("<i class='fa fa-street-view'></i> <span>Management</span>", "AnalyticsManagement", "Analytics")</li>
-                                </ul>
-                            </li>
+            </a>
+            <ul class="collapse treeview-menu">
+                <li>@Html.ActionLinkMenu("<i class='fa fa-plus'></i> <span>Add</span>", "Add", "Safety")</li>
+                <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>List</span>", "Index", "Safety")</li>
+            </ul>
+        </li>
+        <hr style="border-bottom:1px solid #808080; font-size: medium; margin-top: 0px !important; margin-bottom: 0px !important;" />
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-bar-chart"></i>
+                <span class="menu-title">Analytics</span>
+                <i class="arrow"></i>
+            </a>
+            <ul class="collapse treeview-menu">
+                <li>@Html.ActionLinkMenu("<i class='fa fa-street-view'></i> <span>Infra</span>", "AnalyticInfra", "Analytics")</li>
+                <li>@Html.ActionLinkMenu("<i class='fa fa-street-view'></i> <span>Child</span>", "AnalyticChild", "Analytics")</li>
+                <li>@Html.ActionLinkMenu("<i class='fa fa-street-view'></i> <span>HR</span>", "AnalyticHr", "Analytics")</li>
+                <li>@Html.ActionLinkMenu("<i class='fa fa-street-view'></i> <span>Academic</span>", "AnalyticAcademic", "Analytics")</li>
+                <li>@Html.ActionLinkMenu("<i class='fa fa-street-view'></i> <span>Management</span>", "AnalyticsManagement", "Analytics")</li>
+            </ul>
+        </li>
 
-                            <hr style="border-bottom: 1px solid #808080; font-size: medium; margin-top: 0px !important; margin-bottom: 0px !important;" />
+        <hr style="border-bottom: 1px solid #808080; font-size: medium; margin-top: 0px !important; margin-bottom: 0px !important;" />
 
-                            if (User.IsInRole(Leadership.Models.UserRoles.Sadmin))
-                            {
-                                @Html.ActionLinkMenu("<i class='fa fa-home'></i> <span class=\"menu-title\">Dashboard</span>", "Index", "Home")
-                            }
-                            else if (User.IsInRole(Leadership.Models.UserRoles.Admin))
-                            {
-                              <hr style="border-bottom:1px solid #808080; font-size: medium; margin-top: 0px !important; margin-bottom: 0px !important;" />
+        if (User.IsInRole(Leadership.Models.UserRoles.Sadmin))
+        {
+            @Html.ActionLinkMenu("<i class='fa fa-home'></i> <span class=\"menu-title\">Dashboard</span>", "Index", "Home")
+        }
+        else if (User.IsInRole(Leadership.Models.UserRoles.Admin))
+        {
+          <hr style="border-bottom:1px solid #808080; font-size: medium; margin-top: 0px !important; margin-bottom: 0px !important;" />
 
-                                <li class="treeview">
-                                    <a href="#">
-                                        <i class="fa fa-money"></i>
-                                        <span class="menu-title">Finance</span>
-                                        <i class="arrow"></i>
-                                    </a>
-                                    <ul class="collapse treeview-menu">
-                                        <li>@Html.ActionLinkMenu("<i class='fa fa-street-view'></i> <span>School Budget</span>", "SchoolFinanceBudget", "Finance")</li>-->
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-money"></i>
+                    <span class="menu-title">Finance</span>
+                    <i class="arrow"></i>
+                </a>
+                <ul class="collapse treeview-menu">
+                    <li>@Html.ActionLinkMenu("<i class='fa fa-street-view'></i> <span>School Budget</span>", "SchoolFinanceBudget", "Finance")</li>-->
                             @*<li>@Html.ActionLinkMenu("<i class='fa fa-street-view'></i> <span>Fund Received</span>", "FundReceivedList", "Finance")</li>
-                                <li>@Html.ActionLinkMenu("<i class='fa fa-street-view'></i> <span>Monthly Expenses</span>", "MonthlyExpensesList", "Finance")</li>*@
+            <li>@Html.ActionLinkMenu("<i class='fa fa-street-view'></i> <span>Monthly Expenses</span>", "MonthlyExpensesList", "Finance")</li>*@
                             <!--</ul>
-                              </li>
-                            <hr style="border-bottom:1px solid #808080; font-size: medium; margin-top: 0px !important; margin-bottom: 0px !important;" />
+          </li>
+        <hr style="border-bottom:1px solid #808080; font-size: medium; margin-top: 0px !important; margin-bottom: 0px !important;" />
 
-                              <li class="treeview">
-                                  <a href="#">
-                                      <i class="fa fa-file"></i>
-                                      <span class="menu-title">Manage Resources</span>
-                                      <i class="arrow"></i>
-                                  </a>
-                                  <ul class="collapse treeview-menu">
-                                      <li>@Html.ActionLinkMenu("<i class='fa fa-plus'></i> <span>Upload</span>", "ResourceUpload", "Resource")</li>
-                                      <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>Upload List</span>", "Index", "Resource")</li>
-                                      <li>@Html.ActionLinkMenu("<i class='fa fa-plus'></i> <span>Identification Add</span>", "Add", "School")</li>
-                                      <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>Identification List</span>", "Index", "School")</li>
-                                  </ul>
-                              </li>
-                            <hr style="border-bottom:1px solid #808080; font-size: medium; margin-top: 0px !important; margin-bottom: 0px !important;" />
+          <li class="treeview">
+              <a href="#">
+                  <i class="fa fa-file"></i>
+                  <span class="menu-title">Manage Resources</span>
+                  <i class="arrow"></i>
+              </a>
+              <ul class="collapse treeview-menu">
+                  <li>@Html.ActionLinkMenu("<i class='fa fa-plus'></i> <span>Upload</span>", "ResourceUpload", "Resource")</li>
+                  <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>Upload List</span>", "Index", "Resource")</li>
+                  <li>@Html.ActionLinkMenu("<i class='fa fa-plus'></i> <span>Identification Add</span>", "Add", "School")</li>
+                  <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>Identification List</span>", "Index", "School")</li>
+              </ul>
+          </li>
+        <hr style="border-bottom:1px solid #808080; font-size: medium; margin-top: 0px !important; margin-bottom: 0px !important;" />
 
 
-                              <li class="treeview">
-                                  <a href="#">
-                                      <i class="fa fa-cog"></i>
-                                      <span class="menu-title">Manage User</span>
-                                      <i class="arrow"></i>
-                                  </a>
-                                  <ul class="collapse treeview-menu">
-                                      <li>@Html.ActionLinkMenu("<i class='fa fa-plus'></i> <span>Add User</span>", "Add", "Employee")</li>
-                                      <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>User List</span>", "Index", "Employee")</li>
-                                      <li>@Html.ActionLinkMenu("<i class='fa fa-key'></i> <span>Reset Password</span>", "UserResetPassword", "Account")</li>
-                                  </ul>
-                              </li>
-                            <hr style="border-bottom:1px solid #808080; font-size: medium; margin-top: 0px !important; margin-bottom: 0px !important;" />-->
+          <li class="treeview">
+              <a href="#">
+                  <i class="fa fa-cog"></i>
+                  <span class="menu-title">Manage User</span>
+                  <i class="arrow"></i>
+              </a>
+              <ul class="collapse treeview-menu">
+                  <li>@Html.ActionLinkMenu("<i class='fa fa-plus'></i> <span>Add User</span>", "Add", "Employee")</li>
+                  <li>@Html.ActionLinkMenu("<i class='fa fa-list'></i> <span>User List</span>", "Index", "Employee")</li>
+                  <li>@Html.ActionLinkMenu("<i class='fa fa-key'></i> <span>Reset Password</span>", "UserResetPassword", "Account")</li>
+              </ul>
+          </li>
+        <hr style="border-bottom:1px solid #808080; font-size: medium; margin-top: 0px !important; margin-bottom: 0px !important;" />-->
 
 
                         }

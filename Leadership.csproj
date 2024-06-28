@@ -178,6 +178,7 @@
     <Compile Include="Controllers\CompetencyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SLLTAssessmentsController.cs" />
     <Compile Include="Controllers\SurveyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1529,11 +1530,16 @@
     <Content Include="Views\Shared\_Navigation.cshtml" />
     <Content Include="Views\Account\Register - Copy.cshtml" />
     <Content Include="Views\Survey\Summary.cshtml" />
+    <Content Include="Views\SLLTAssessments\_Index.cshtml" />
+    <Content Include="Views\SLLTAssessments\Add.cshtml" />
+    <Content Include="Views\SLLTAssessments\Index.cshtml" />
+    <Content Include="Views\SLLTAssessments\ScorerSummary.cshtml" />
+    <Content Include="Views\SLLTAssessments\Summary.cshtml" />
     <Content Include="Views\Competency\Add.cshtml" />
-    <Content Include="Views\Competency\_Index.cshtml" />
     <Content Include="Views\Competency\Index.cshtml" />
-    <Content Include="Views\Competency\Summary.cshtml" />
     <Content Include="Views\Competency\ScorerSummary.cshtml" />
+    <Content Include="Views\Competency\Summary.cshtml" />
+    <Content Include="Views\Competency\_Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

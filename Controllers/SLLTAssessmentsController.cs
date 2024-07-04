@@ -547,6 +547,57 @@ namespace Leadership.Controllers
             }
         }
         #endregion
+        public ActionResult ReportGraph()
+        {
+            var model = new QesRes
+            {
+
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ReportGraph(QesRes model)
+        {
+            bool isSuccess = false;
+            try
+            {
+                DataTable dt = SP_Model.Sp_ReportGraph();
+                if (dt.Rows.Count > 0)
+                {
+                    isSuccess = true;
+                    var dataList = dt.AsEnumerable().Select(row => new
+                    {
+                        Question = row["Question"].ToString(),
+                        SectionType = Convert.ToInt32(row["SectionType"]),
+                        Response1 = row["1"].ToString(),
+                        Response2 = row["2"].ToString(),
+                        Response3 = row["3"].ToString(),
+                        Response4 = row["4"].ToString(),
+                        Response5 = row["5"].ToString(),
+                    }).ToList();
+
+                    return Json(new
+                    {
+                        IsSuccess = isSuccess,
+                        Data = dataList
+                    }, JsonRequestBehavior.AllowGet);
+                }
+
+                return Json(new
+                {
+                    IsSuccess = isSuccess,
+                    Data = "No records found."
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    IsSuccess = isSuccess,
+                    Data = "There was a communication error."
+                }, JsonRequestBehavior.AllowGet);
+            }
+        }
 
     }
 }

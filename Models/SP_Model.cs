@@ -73,6 +73,13 @@ namespace Leadership.Models
             DataSet ds = sp.ExecuteDataSet();
             return ds;
         }
+        public static DataTable Sp_ReportGraph()
+        {
+            StoredProcedure sp = new StoredProcedure("Sp_ReportGraph");
+            DataTable dt = sp.ExecuteDataSet().Tables[0];
+            return dt;
+        }
+
         #endregion
 
         #region Start 28 June 2024  SLLT Survey Controller 

@@ -159,7 +159,7 @@
                                         totalIncorrect += Datafilter[i].Ans == 0 ?? Datafilter[i].Ans;
                                         htmlul += "<dt>" + Datafilter[i].QuestionCode + ". " + Datafilter[i].Question + "</dt>";
                                         //htmlul += "<dd>" + (Datafilter[i].Ans == 1 ? " <strong style='color:#008000'>Correct : " + Datafilter[i].Ans : "</strong> <strong style='color:#FF0000'>Incorrect : " + Datafilter[i].Ans) + "</strong></dd>";
-                                        htmlul += Datafilter[i].Ans == 1 ? "<dd>" + " <strong style='color:#008000'>Correct : " + Datafilter[i].ResponseCode + "</strong> </dd>" : "";
+                                        htmlul += Datafilter[i].Ans == 1 ? "<dd>" + " <strong style='color:#008000'>Choice : " + Datafilter[i].ResponseCode + " " + Datafilter[i].LabelName1 + "</strong> </dd>" : "";
                                         // var clr = Datafilter[i].Ans == 0 ? '#FF0000' : '#008000';
                                         //Datal.push({ name: Datafilter[i].Question, y: Datafilter[i].Ans, color: clr });
                                     }
@@ -173,7 +173,7 @@
                                     TAns = totalAns; TIncorrect = totalIncorrect;
                                     totalAns = (totalAns * 100) / (Datafilter.length)
                                     totalIncorrect = (totalIncorrect * 100) / (Datafilter.length)
-                                    Datal.push({ name: 'Correct', y: totalAns, color: '#008000' });
+                                    Datal.push({ name: 'Choice', y: totalAns, color: '#008000' });
                                     // Datal.push({ name: 'Incorrect', y: totalIncorrect, color: '#FF0000' });
                                     //Highcharts.setOptions({
                                     //    colors: Highcharts.map(Highcharts.getOptions().colors, function (color) {
@@ -208,7 +208,7 @@
                                         },
                                         subtitle: {
                                             //text: '<b> Marks Correct/Incorrect : ' + TAns + '/' + TIncorrect + '</b>',
-                                            text: '<b> Marks Correct : ' + TAns +'</b>',
+                                            text: '<b> Marks Choice : ' + TAns +'</b>',
                                             align: 'center',
                                             style: {
                                                 fontSize: 12

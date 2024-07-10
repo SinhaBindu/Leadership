@@ -565,17 +565,17 @@ namespace Leadership.Controllers
                 if (dt.Rows.Count > 0)
                 {
                     isSuccess = true;
-                    var dataList = dt.AsEnumerable().Select(row => new
-                    {
-                        Question = row["Question"].ToString(),
-                        SectionType = Convert.ToInt32(row["SectionType"]),
-                        Response1 = row["1"].ToString(),
-                        Response2 = row["2"].ToString(),
-                        Response3 = row["3"].ToString(),
-                        Response4 = row["4"].ToString(),
-                        Response5 = row["5"].ToString(),
-                    }).ToList();
-
+                    //var dataList = dt.AsEnumerable().Select(row => new
+                    //{
+                    //    Question = row["Question"].ToString(),
+                    //    SectionType = Convert.ToInt32(row["SectionType"]),
+                    //    Response1 = row["1"].ToString(),
+                    //    Response2 = row["2"].ToString(),
+                    //    Response3 = row["3"].ToString(),
+                    //    Response4 = row["4"].ToString(),
+                    //    Response5 = row["5"].ToString(),
+                    //}).ToList();
+                    var dataList = JsonConvert.SerializeObject(dt);
                     return Json(new
                     {
                         IsSuccess = isSuccess,

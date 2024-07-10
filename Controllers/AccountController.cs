@@ -88,7 +88,7 @@ namespace Leadership.Controllers
             {
                 case SignInStatus.Success:
                     //return RedirectToLocal(returnUrl);
-                    return RedirectToAction("Summary", "Competency");
+                    return RedirectToAction("ReportGraph", "SLLTAssessments");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -207,7 +207,7 @@ namespace Leadership.Controllers
                             {
                                 return RedirectToAction("Index", "SLLTAssessments");
                             }
-                            return RedirectToAction("Summary", "Competency");
+                            return RedirectToAction("ReportGraph", "SLLTAssessments");
                         case SignInStatus.LockedOut:
                             return View("Lockout");
                         case SignInStatus.RequiresVerification:
@@ -502,7 +502,7 @@ namespace Leadership.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("ReportGraph", "SLLTAssessments");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

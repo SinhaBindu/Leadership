@@ -2,9 +2,9 @@
 @using Leadership.Models
 @*@model IEnumerable<KGBV_JH.Models.QesRes>*@
 @{
-    ViewBag.Title = "Report Graph";
+    ViewBag.Title = "Summary Report";
     ViewBag.TitleIcon = "fa fa-area-chart";
-    ViewBag.SemiTitle = "Report Graph";
+    ViewBag.SemiTitle = "Summary Report";
     ViewBag.SemiTitleLink = "/SLLTAssessments/ReportGraph";
 }
 <style>
@@ -127,7 +127,12 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/Scripts/App/ChartSummary1.js"></script>
+    @*<script src="~/Scripts/App/ChartSummary1.js"></script>*@
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
 
     <script>
         $(document).ready(function () {
@@ -164,92 +169,167 @@
                 LoadReport();
             })*@
 
+            LoadReport();
+
         });//end load ready
 
-
-
-        function ReportGraph(data) {
-            if (data && data.length > 0) {
-                var ReportGraph = data.map(function (item) { return item.ReportGraph; });
-            //var NoofData_Modular = data.map(function (item) { return item.; });
-            //var NoofData_Plan = data.map(function (item) { return item.NoofData_Plan; });
-
-            // Render Highcharts chart
-            Highcharts.chart('ReportGraph', {
-                chart: {
-                    type: 'column'
-                },
-                title: {
-                    text: 'Answer Submitted Graph Data'
-                },
-                xAxis: {
-                    categories: categories,
-                    title: {
-                        text: 'School Name'
-                    }
-                },
-                yAxis: {
-                    title: {
-                        text: 'Number of Data'
-                    }
-                },
-                legend: {
-                    layout: 'vertical',
-                    align: 'right',
-                    verticalAlign: 'middle'
-                },
-                plotOptions: {
-                    series: {
-                        label: {
-                            connectorAllowed: false
-                        },
-                        pointStart: 1
-                    }
-                },
-               series: [{
-                    name: 'NoofData_Modular',
-                    data: NoofData_Modular
-                }, {
-                    name: 'NoofData_Plan',
-                    data: NoofData_Plan
-                }],
-                //responsive: {
-                //    rules: [{
-                //        condition: {
-                //            maxWidth: 500
-                //        },
-                //        chartOptions: {
-                //            legend: {
-                //                layout: 'horizontal',
-                //                align: 'center',
-                //                verticalAlign: 'bottom'
-                //            }
-                //        }
-                //    }]
-                //}
-            });
-        }
-        }
-
-          function LoadReport() {
+       function LoadReport() {
         $('#errormsg').html("");
         $('#global-loader').css('background', 'transparent').css('display', 'block');
         $('#errormsg').removeClass("text-danger");
 
         $.ajax({
-            url: '@Url.Action("ReportGraph", "Competency")',
+            url: '@Url.Action("ReportGraph", "SLLTAssessments")',
             type: "POST",
-            data: {
-                //FD: $('#FD').val(),
-                //TD: $('#TD').val(),
-                //DistrictId: $('#DistrictId').val(),
-                //SchoolId: $('#SchoolId').val()
-            },
+            data: '',
             success: function (resp) {
                 $('#global-loader').css('background', 'transparent').css('display', 'none');
                 if (resp.IsSuccess) {
-                    var chartData = resp.Data;
-                    ReportGraph(chartData); // Call function to render chart
+                    debugger;
+                    //var chartData = resp.Data;
+                    //ReportGraph(chartData); // Call function to render chart
+
+                    var Datal = [], QList = []; var index = 0; var totalAns = 0, totalIncorrect = 0, TAns = 0, TIncorrect = 0;
+                    var Datalist = JSON.parse(resp.Data);
+                    if (Datalist != null && Datalist != undefined) {
+                        if (Datalist.length > 0) {
+
+                            var gpy = groupBy(Datalist, "Question");
+                            $.each(gpy, function (item, row) {
+                                var htmlul = "<dl>";
+
+                                var chart;
+                                Datal = []; QList = []; totalAns = 0, totalIncorrect = 0, TAns = 0, TIncorrect = 0;
+                                var div_Chart = 'div_Chart' + index;
+                                var div_multiple = '<div class="col-sm-6" style="  border:1px solid #808080;"><div  id="div_Chart' + index + '" ></div>';
+                                //
+                                var Datafilter = Datalist.filter(x => x.Question == item);
+                                TAns = 0;
+                                for (var i = 0; i < Datafilter.length; i++) {
+                                    QList.push(Datafilter[i].Question);
+                                    totalAns = Datafilter[i].Noofdata == 1 ?? Datafilter[i].Noofdata;
+                                    //totalIncorrect += Datafilter[i].Noofdata == 0 ?? Datafilter[i].Noofdata;
+                                    ///htmlul += "<dt>" + Datafilter[i].QuestionCode + ". " + Datafilter[i].Question + "</dt>";
+                                    //htmlul += "<dd>" + (Datafilter[i].Ans == 1 ? " <strong style='color:#008000'>Correct : " + Datafilter[i].Ans : "</strong> <strong style='color:#FF0000'>Incorrect : " + Datafilter[i].Ans) + "</strong></dd>";
+                                    ////htmlul += Datafilter[i].Noofdata == 1 ? "<dd>" + " <strong style='color:#008000'>Choice : " + Datafilter[i].ResponseCode + " " + Datafilter[i].LabelName1 + "</strong> </dd>" : "";
+                                    // var clr = Datafilter[i].Ans == 0 ? '#FF0000' : '#008000';
+                                    Datal.push({ name: Datafilter[i].LabelName1, y: Datafilter[i].Noofdata });//, color: '#008000'
+                                    TAns += parseInt(Datafilter[i].Noofdata);
+                                }
+                                htmlul += "</dl>";
+
+                                div_multiple = div_multiple + "<div>" + htmlul + "</div></div>";
+                                // $(div_multiple).append(htmlul);
+                                $('#div-main').append(div_multiple);
+
+                                // $('#sub-list').html(htmlul);
+                                //TAns = totalAns;
+                                //TIncorrect = totalIncorrect;
+                                //totalAns = (totalAns * 100) / (Datafilter.length)
+                                //totalIncorrect = (totalIncorrect * 100) / (Datafilter.length)
+                                //Datal.push({ name: item, y: TAns, color: '#008000' });
+                                // Datal.push({ name: 'Incorrect', y: totalIncorrect, color: '#FF0000' });
+                                //Highcharts.setOptions({
+                                //    colors: Highcharts.map(Highcharts.getOptions().colors, function (color) {
+                                //        return {
+                                //            radialGradient: {
+                                //                cx: 0.5,
+                                //                cy: 0.3,
+                                //                r: 0.7
+                                //            },
+                                //            stops: [
+                                //                [0, color],
+                                //                [1, Highcharts.color(color).brighten(-0.3).get('rgb')] // darken
+                                //            ]
+                                //        };
+                                //    })
+                                //});
+
+                                // Build the chart
+                                /*  Highcharts.chart('div-Chart' + row, {*/
+                                div_Chart = new Highcharts.Chart({
+                                    chart: {
+                                        renderTo: div_Chart,
+                                        plotBackgroundColor: null,
+                                        plotBorderWidth: null,
+                                        plotShadow: false,
+                                        type: 'pie'
+                                    },
+                                    title: {
+                                        // text: 'Leadership Pizza Self-Assessment',
+                                        text: item,
+                                        align: 'center'
+                                    },
+                                    subtitle: {
+                                        //text: '<b> Marks Correct/Incorrect : ' + TAns + '/' + TIncorrect + '</b>',
+                                        text: '<b> No Of Choice : ' + TAns + '</b>',
+                                        align: 'center',
+                                        style: {
+                                            fontSize: 12
+                                        },
+                                    },
+                                    tooltip: {
+                                        //  pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                                        pointFormat: '{series.name}: <b>{point.y}</b>'
+                                    },
+                                    credits: {
+                                        enabled: false
+                                    },
+                                    legend: {
+                                        layout: 'horizontal',
+                                        align: 'center',
+                                        verticalAlign: 'bottom',
+                                        floating: false,
+                                        borderWidth: 1,
+                                        fontSize: 12,
+                                        backgroundColor: '#FFFFFF',
+                                        shadow: true,
+                                        labelFormatter: function () {
+                                            //return '<div class="' + this.name + '-arrow"></div><span style="font-family: \'Advent Pro\', sans-serif; font-size:12px">' + this.name + '</span><br/><span style="font-size:12px; color:#ababaa">  ' + (this.options.y == 1 ? " Answers Correct : " :"Incorrect : ") +' ' + this.options.y + '</span>';
+                                            return '<div class="' + this.name + '-arrow"></div><span style="font-family: \'Advent Pro\', sans-serif; font-size:12px">' + this.name + '</span><br/><span style="font-size:12px; color:#ababaa">   ' + (this.options.y.toFixed(2)) + ' % </span>';
+                                        }
+                                    },
+                                    accessibility: {
+                                        point: {
+                                            valueSuffix: '%'
+                                        }
+                                    },
+                                    plotOptions: {
+                                        pie: {
+                                            allowPointSelect: true,
+                                            cursor: 'pointer',
+                                            dataLabels: {
+                                                enabled: true,
+                                                format: '<span style="font-size: 1.2em"><b>{point.name}</b></span><br>' +
+                                                    '<span style="opacity: 0.6">{point.percentage:.1f} %</span>',
+                                                connectorColor: 'rgba(128,128,128,0.5)'
+                                            }
+                                        }
+                                    },
+
+                                    series: [{
+                                        name: 'Choice',
+                                        allowPointSelect: true,
+                                        keys: ['name', 'y', 'selected', 'sliced'],
+                                        data: Datal,
+                                        showInLegend: true,
+                                        dataLabels: {
+                                            style: {
+                                                fontSize: 12
+                                            }
+                                        },
+                                    }]
+                                });
+
+
+                                index++;
+
+                            })
+                        }
+                    }
+
+
+
                 } else {
                     $('#errormsg').html(resp.Data).addClass("text-danger");
                 }
@@ -260,7 +340,81 @@
                 $('#global-loader').css('background', 'transparent').css('display', 'none');
             }
         });
-    }
+        }
+
+        const groupBy = (array, key) => {
+            // Return the end result
+            return array.reduce((result, currentValue) => {
+                // If an array already present for key, push it to the array. Else create an array and push the object
+                (result[currentValue[key]] = result[currentValue[key]] || []).push(
+                    currentValue
+                );
+                // Return the current iteration `result` value, this will be taken as next iteration `result` value and accumulate
+                return result;
+            }, {}); // empty object is the initial value for result object
+        };
+
+        function ReportGraph(data) {
+            if (data && data.length > 0) {
+
+
+                // Render Highcharts chart
+                Highcharts.chart('ReportGraph', {
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: 'Summary Report'
+                    },
+                    xAxis: {
+                        categories: categories,
+                        //title: {
+                        //    text: 'School Name'
+                        //}
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Number of Answers'
+                        }
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle'
+                    },
+                    plotOptions: {
+                        series: {
+                            label: {
+                                connectorAllowed: false
+                            },
+                            pointStart: 1
+                        }
+                    },
+                    series: [{
+                        name: 'NoofData_Modular',
+                        data: NoofData_Modular
+                    }, {
+                        name: 'NoofData_Plan',
+                        data: NoofData_Plan
+                    }],
+                    //responsive: {
+                    //    rules: [{
+                    //        condition: {
+                    //            maxWidth: 500
+                    //        },
+                    //        chartOptions: {
+                    //            legend: {
+                    //                layout: 'horizontal',
+                    //                align: 'center',
+                    //                verticalAlign: 'bottom'
+                    //            }
+                    //        }
+                    //    }]
+                    //}
+                });
+            }
+        }
+
 
     </script>
 }
